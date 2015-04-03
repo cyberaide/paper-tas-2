@@ -1,0 +1,463 @@
+\documentclass{sig-alternate} 
+
+\newcommand{\TITLE}{Towards a Scientific Impact Measuring Framework for Large Computing Facilities - a Case Study on XSEDE} 
+\newcommand{\AUTHOR}{Fugang Wang, Gregor von Laszewski} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LATEX DEFINITIONS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{hyperref} 
+\usepackage{array} 
+\usepackage{graphicx} 
+\usepackage{booktabs} 
+\usepackage{pifont} 
+\usepackage{todonotes} 
+\usepackage{rotating} 
+\usepackage{color} 
+ 
+\newcommand*\rot{\rotatebox{90}} 
+ 
+\newcommand{\FILE}[1]{\todo[color=green!40]{#1}} 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYPERSETUP 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hypersetup{ 
+    bookmarks=true,         % show bookmarks bar 
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks 
+    pdftoolbar=true,        % show Acrobat’s toolbar 
+    pdfmenubar=true,        % show Acrobat’s menu 
+    pdffitwindow=false,     % window fit to page when opened 
+    pdfstartview={FitH},    % fits the width of the page to the window 
+    pdftitle={\TITLE},    % title 
+    pdfauthor={\AUTHOR},     % author 
+    pdfsubject={Subject},   % subject of the document 
+    pdfcreator={Gregor von Laszewski, Fugang Wang},   % creator of the document 
+    pdfproducer={Gregor von Laszewski}, % producer of the document 
+    pdfkeywords={hindex} {metric}{XSEDE} {FutureGrid}, % list of keywords 
+    pdfnewwindow=true,      % links in new window 
+    colorlinks=false,       % false: boxed links; true: colored links 
+    linkcolor=red,          % color of internal links (change box color with linkbordercolor) 
+    citecolor=green,        % color of links to bibliography 
+    filecolor=magenta,      % color of file links 
+    urlcolor=cyan           % color of external links 
+} 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ 
+\begin{document} 
+% 
+% --- Author Metadata here --- 
+\conferenceinfo{XSEDE}{'14 Atlanta, Georgia, U.S.A.} 
+\CopyrightYear{2014}  
+\crdata{X-XXXXX-XX-X/XX/XX}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE. 
+% --- End of Author Metadata --- 
+ 
+\title{\TITLE} 
+%\subtitle{[Extended Abstract] 
+%\titlenote{A full version of this paper is available as 
+%\texttt{www.acm.org/eaddress.htm}}} 
+ 
+\numberofauthors{4}  
+\author{ 
+\alignauthor 
+Fugang Wang\\ 
+       \affaddr{Indiana University}\\ 
+       \affaddr{2719 10th Street}\\ 
+       \affaddr{Bloomington, Indiana, U.S.A.}\\ 
+ % 2nd. author 
+\alignauthor 
+Gregor von Laszewski\titlenote{Corresponding Author.}\\ 
+       \affaddr{Indiana University}\\ 
+       \affaddr{2719 10th Street}\\ 
+       \affaddr{Bloomington, Indiana, U.S.A.}\\ 
+       \email{laszewski@gmail.com} 
+% 3rd. author 
+\alignauthor 
+Geoffrey C. Fox\\ 
+       \affaddr{Indiana University}\\ 
+       \affaddr{2719 10th Street}\\ 
+       \affaddr{Bloomington, Indiana, U.S.A.}\\ 
+\and  % use '\and' if you need 'another row' of author names 
+% 4th. author 
+\alignauthor  
+Tom Furlani\\ 
+       \affaddr{SUNY at Buffalo}\\ 
+       \affaddr{701 Ellicott Street}\\ 
+       \affaddr{Buffalo, New York, 14203} 
+} 
+\date{13 March 2014} 
+ 
+\toappear{} 
+\maketitle 
+\begin{abstract} 
+ 
+In this paper we presented a framework that (a) integrates publication and citation data retrieval, (b) scientific impact metrics generation on different aggregated levels, as well as (c) correlation analysis of the impact metrics in regards to resource allocation for a computing facility. Furthermore, we used this  framework to conduct scientific impact metrics evaluation of XSEDE, and did extensive statistical analysis on the impact metrics on project level and Field of Science (FOS) level correlating to the Service Units (SUs) allocated by XSEDE. This analysis not only shows the impact of the XSEDE in general, but also details how the impact is reflected on project level and different FOS. The lessons learned form this analysis could be utilized by XSEDE resource allocation review to help assess and identify projects with higher scientific impact within XSEDE and indications based on simple publication metrics better return of investment in general of the resources.
+ 
+\end{abstract} 
+ 
+% A category with the (minimum) three required fields 
+\category{H.4}{Information Systems Applications}{Miscellaneous} 
+%A category including the fourth, optional field follows... 
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures] 
+ 
+\terms{Theory} 
+ 
+\keywords{Scientific impact, bibliometric, h-index, Technology audit, XSEDE} 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% SECTIONS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ 
+\section{Introduction} 
+ 
+It is a well known fact that many advanced science and engineering innovation and discoveries  require an increased amount of computing power. This demand is supported by  very large-scale compute resources that cannot be efficiently managed by individual research groups. Dedicated large-scale computing facilities play an important role here, in which resources are shared among various groups of researchers, while the facilities themselves are managed by dedicated staff. The National Science Foundation and the Department of Energy have supported such facilities. One such facility is the Extreme Science and Discovery Environment (XSEDE). XSEDE is an an evolution from the TeraGrid. \cite{www-xsede}and provides large scale resources to researchers from the US and their international collaborators. Reserachers must submit first a proposal that is peer reviewed before they can gain access. Upon approval of the proposal the researcher is granted a predefined amount of resources, e.g., computing core-hours, storage spaces, and support by staff. Because the resources represent a tremendous amount of investment, justification to use the resources are warranted and some natural questions arise to identify how such large scale resources contribute:
+ 
+\begin{enumerate} 
+\item Is there a way to measure the impact of providing such facilities like XSEDE to scientist?  
+ 
+\item How is the impact of scientific research of individual user, project, or field of study, with respect to the resources allocated?  
+ 
+\item When evaluating a proposal request, what is the criteria to judge whether the proposal is potentially leading to good research and broader impact, and how to get metrics to back up this? 
+\end{enumerate} 
+ 
+To answer these questions, we need a process to quantify the scientific outcome for the research conducted while defining metrics that correlate to the consumed resources to a measure that indicates impact by the science activities conducted. In this paper, we present a framework that does provide one metric to do so. We have to point out that measuring scientific impact can be quite controversial and that the presented results do not necessarily represent an absolute value of the impact a science project has, but the results we present project one of many factors that together define the scientific impact.
+Furthermore, we have restricted the activities mostly towards studying activities and their outcomes on XSEDE. However, the work presented here has general applicability to other resources and can even be expanded to other resource providers including Department of Energy, or even a local compute data center.
+
+
+In particular we focus our effort to identify impact based on scientific publications as the base unit of the research output\footnote{sounds funny}, and obtain data as well as derive various metrics on top of that to measure the impact of individual users, projects, Field of Science (FOS), and XSEDE itself as a whole. 
+ 
+In the following sections we will first briefly discuss the related work (Section \ref{S:related}), then present our designed framework (Section \ref{S:design}). and some implementation (Section \ref{S:implementation}) details .The results and discussions then follow (Section \ref{S:result}). Finally, we outline our future plans and conclude the paper (Section {S:conclusion}). 
+ 
+ 
+ 
+\section{Related Work} \label{S:related}
+ 
+Our choice of using publication as the basic unit to measure the impact is backed up by the fact that the bibliometric based criteria is one of the de-facto standards to measure the impact of research. For example, publication derived metrics are broadly used in faculty recruit/promotion, and institution ranking \cite{thomas1998institutional}. 
+ 
+while usage based metrics are proposed by some \cite{Bollen:2007:MUM:1255175.1255273,Bollen:2008:TUI:1378889.1378928, bollen2009principal}, citation based metrics are probably still the standard and well accepted measure. 
+
+In addition to the intuitive measures like number of publications and number of citations, h-index \cite{hirsch2005index} and g-index \cite{egghe2006theory} are two other popular metrics. The publication count is often related to a measure of the productivity, while citation counts are often related to the the quality, or impact of the work published. As h-index and g-index calculate the metric by combining this data, they measure both the productivity and the quality, thus providing a general measure for impact. For instance, nanoHub uses these criteria to measure the impact of their project \cite{www-nanohubcite}. It defined a `citation' as a published work that cites/refers to the nanoHub site or its related content, and `secondary citations' as citations received of the previously defined `citation' \footnote{not clear, maybe we should use our notation , but mention that nanonhub uses a different one and explain the difference. This way its easier to understand}. Based on this, it analyzed the statistical distributions of the `citation' related data based on different criteria, e.g., author's organization; topic area - research, education; cited year; publication type; and others. The overall secondary citation and h-index are also computed to show the overall impact of the project. 
+ 
+There are existing tools to measure the metrics for individual users, e.g. Scholarometer \cite{kaur2012scholarometer} and Publish or Perish \cite{www-pop}. These could be potentially leveraged to analyze a relatively small group of users, e.g., the work \cite{bollen2011and} showing TeraGrid's impact based on limited data from one resource allocation meeting consisting of  only112 selected PIs. 
+However, neither of the tools provides a scalable solution to the large community we are concerning which consists of over 20 thousands users such is the case for XSEDE.
+ 
+While a more formal publication based metrics, either based on citation or usage, are still the most prevailing criteria, there are other proposals to include other measures. E.g., altmetrics \cite{www-altmetrics} proposes to include measures for dataset, code; as well as mentioning of a snippet of work via social networking; among others. We acknowledge these efforts as the trend of big data and social networking might suggest, however at this time there still lacks a standard and a well established way to objectively derive measures based on these measurements. 
+ 
+ 
+%\input{futuregrid} 
+ 
+%\input{requirements} 
+ 
+\section{System Design} \label{S:design}
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/tas-arch.pdf} 
+  \caption{The Architecture of the Framework}\label{F:tas-arch} 
+\end{figure} 
+  
+We have designed a software framework to support the measuring of the scientific impact. The framework is based on distributed set of services (involving IU, UB, NCSA and other external resources e.g.). This service-oriented system  consists of components for  publication and citation data retrieval (e.g., from Google Scholar and ISI Web of Science), parsing and processing while correlating data from various databases and services (e.g., XSEDE central database and POPS database); the metrics generation and analysis system for the different aggregated levels (users, projects, organization, Field of Science (FOS) ); as well as a presentation layer using a light weight portal in addition to exposing some data via RESTful API. 
+ 
+Fig \ref{F:tas-arch} shows the layered system architecture, with an emphasis on the relationships between related components especially those integrating with databases. In general we obtain the publication data for each XSEDE user, and then retrieve the citation data for each publication. The data is originally collected per user and per publication basis, but can also be aggregated based on organization, XSEDE project/account, Field of Science (FOS), and other categories while providing the input for the metrics generation and analysis. When correlating the data with the input (for example the Service Units (SUs) awarded by XSEDE) the analysis may reveal patterns and trends of how XSEDE can impact the sciences and potentially helps to achieve better return of investment. 
+ 
+While we are using the system to analyze the scientific impact of XSEDE, the framework itself is flexible enough that could be easily adapted to other similar systems for impact measure and analyses. 
+ 
+ 
+\section{Implementation} \label{S:implementation}
+ 
+We have implemented the system following best practices and leveraging popular tools and frameworks. The core system is developed in python using the  python libraries MySQLdb, SQLAlchemy, psycopg2 to interact with the various data sources. Python library requests and BeautifulSoup are used for scraping citation data and properly parsing them. The Flask framework is used for the service interface and Web GUI. Various JavaScript libraries such as highcharts are utilized in the Web tier. 
+ 
+Publication and citation data retrieval is has been initially an unexpected complication, so we detail the process next. 
+ 
+\subsection{Publication Data Acquisition} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/21_pubs_year_distribution.pdf} 
+  \caption{Publications by Year}\label{F:pubs-year-distribution} 
+\end{figure} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/01_dist_npubs_proj.pdf} 
+  \caption{Distribution of number of publications}\label{F:dist-npubs-proj} 
+\end{figure} 
+ 
+
+We started the project by following the automated approach to obtain publication data. Publication citation data are available via subscribed resources such as ISI Web of Science \cite{www-isiwos} or open access such as Google Scholar \cite{www-googlescholar}, Microsoft Academic Search \cite{www-msas}, and Mendeley \cite{www-mendeley}, however they usually do not provide unlimited access. 
+ 
+Another approach is to obtain the publication data directly from users. As the user curated data it tends to be more accurate in comparision to the automated mining. Additionally, it can provide extra information regarding a publication's association with the system, e.g., to which project it belongs. 
+Such a system was first implemented in FutureGrid leverageing the drupal biblio module \cite{www-drupal-bib} which we have customized and to support easy publication reporting and mass publication imports directly by the users or by a staff member. This upload is correlated with  with the project the publication is most closely related to \cite{www-fgbiblio}. XSEDE replicated this functionality and now provides it via their portal \cite{www-xdportalpub} using a different portal framework. The nanoHub citation analysis \cite{www-nanohubcite} as we have mentioned is also based on publication data submitted by users via a web form. 
+ 
+The framework reported on in this paper supports pluggable data sources that allow the mining databases and/or accessing 3rd party service APIs. We have experimented with various data sources including Microsoft Academic Search, Google Scholar including user profiles, and mining NSF award search data that is available upon request from NSF. The obtained data records are then stored into the Mashup database which provides a common interface to other components in the system as well as collaborating systems like XDMOD. 
+ 
+In this study we focus only on two of these data sources - the user submitted data via XSEDE, and the NSF award search data for automated mining. The former source has user curated data with project affiliation information, thus in principal it gives a measure on `direct' impact of XSEDE. However, as it requires users' input, the data directly retrieved from XSEDE currently has very limited data entries. In the automated process we obtain publication data for XSEDE users, but can not essentially correlate the records with output created based on XSEDE resources. However, it does  provide a measure on a `general’ or `indirect' impact of XSEDE. As a XSEDE user is affiliated with accounts/projects, and the projects are part of one or more FOS, we can thus tag a publication as being related to the projects and FOSes based on these indirect correlations. Although not ideal, it provides a means to analyze the `indirect' impact on other levels in addition to users. 
+ 
+Based on our ongoing calculation we were so far able to obtain over 142 thousand publication entries for over 20 thousand XSEDE users as of Jan 2014. 
+This by itself is an enormous big achievement and as we know there is no database in existence that has this level of details that can be correlated to reserachers participating in XSEDE. To provide a quick overview of the data analyzed we refer to Figure \ref{F:pubs-year-distribution} showing the yearly distribution of the publications. Figure \ref{F:dist-npubs-proj} shows the distribution of number of the publications by project (on the left) and by per user for each project. 
+ 
+\subsection{Citation Data Retrieval} 
+ 
+While for the publication data the user curated data might be more ideal, we need to conduct an automated search to identify the subsequent citations of the publications. 
+Due to the size of the data, the only realistic way to accomplish this is with an automated process. Google Scholar and ISI Web of Science provide such data but with some noticeable limitations. In case of Google Scholar the  API is not provided, nor does it allow unlimited access within a bounded time period from one request source.\footnote{Please note that the API and access used to be available, but has been removed from public access for a while now. While previous efforts could benefit from this today the limitation provides a significant hurdle.} ISI data does not impose a rate limiting while you have subscribed access, however it does also not provide an easy access API. Thus we were forced to emulate such an API while submitting queries via the web UI and then parse the data from the tabulated results list. 
+ 
+We have explored Google Scholar and ISI data both approaches for a subset of the publication data, and did a comparison of the results. While similar comparison has been attempted \cite{yang2006citation}, such comparision is restricted to a very small sample size - 2 people and about 100 publications. However,  our study has included 33861 publications and 1462 users, moreover they are related to XSEDE.
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/11_gs_vs_isi_cites.pdf} 
+  \caption{Citations (GS vs ISI)}\label{F:gs-vs-isi-cites} 
+\end{figure} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/11_gs_vs_isi_hindex.pdf} 
+  \caption{H-index (GS vs ISI)}\label{F:gs-vs-isi-hindex} 
+\end{figure} 
+ 
+The result of this activity is depicted in Figure \ref{F:gs-vs-isi-cites} and correlates the citation data from Google Scholar (GS) with the ISI Web of Science. Out of the 33861 data points, 20793 of them (61.4\%) have larger values in GS, 10315 (30.5\%) are the same, while 2753 (8.1\%) have larger values in ISI. 5287 (15.6\%) publications have zero citation found in ISI but non-zero in GS, 1253 (3.7\%) pubs have zero citaion in GS but non-zero in ISI. Thus we conclude that in general Google Scholar tends to have higher citation number. 
+ 
+Figure \ref{F:gs-vs-isi-hindex} shows that H-index obtained from Google Scholar data and correlates it to data from ISI. Out of the 1462 data points, 663 of them (45.3\%) have larger value in GS, 677 (46.3\%) are the same, while 122 (8.3\%) have larger value in ISI. 52 (3.6\%) PIs have zero H-index computed from ISI data but are non-zero in GS, 39 (2.7\%) for the reverse side. Thus we conclude that in general the h-index calculated from Google Scholar data tends to be a bit higher. 
+ 
+In either case a high positive correlation is observed. The Pearson correlation coefficient are 0.84 and 0.97 respectively. The very strong correlation of the h-index values are mostly due to the fact that one of the two factors determining the h-index, the number of publications, stay the same for a particular user. 
+ 
+Based on our study while being aware of the limitations, we were able to use the ISI citation data to get very similar measures for most of the data especially for the h-index metric. This is especially useful if we consider that we do have issues to retrieve a complete ditation data set from Google scholar for each of our relevant users and publications.
+
+Thus the following analyses are only using citations from ISI to further derive other metrics. 
+ 
+\section{Results and Analyses} \label{S:result}
+ 
+The previous section explained the reasining and adequacy of the data we have obtained and use in the subsequent analysis. In this section we will discuss the metrics derived from those data to evaluate the impact. We will also conduct analyses for the metrics within XSEDE by identifying 
+
+Correlation between data to show how the impact is reflected on different categories, for example the Field of Science (FOS). 
+ 
+\subsection{Direct impact of XSEDE} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/XDPUBS_Metrics_FOS.png} 
+  \caption{Metrics in FOS level}\label{F:xdpubs-metrics-fos} 
+\end{figure} 
+ 
+By using the user vetted submited publications only\footnote{which are tagged as `direct' output of XSEDE projects}, we were able to show the `direct' impact of XSEDE.  As of Jan 27, 2014, there are currently registered 837 publications involving 882 XSEDE users as authors, 220 organizations, 331 XSEDE projects, and a total of 11,258 citations to date. Please note that these values are temporarily and tthat they are incomplete as not all users have contributed their publications to XSEDE projects.
+
+Based on this data,  we have calculated the various metrics on the level of user, organization, projects, and FOS involved. Figure \ref{F:xdpubs-metrics-fos} shows the FOSes judging with the highest h-index values. 
+ 
+\subsection{Project metrics vs SUs allocation} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/02_metrics_vs_alloc_proj.pdf} 
+  \caption{Metrics vs SUs for all projects}\label{F:metrics-vs-alloc-proj} 
+\end{figure} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/02_metrics_vs_alloc_research_proj.pdf} 
+  \caption{Metrics vs SUs for research projects}\label{F:metrics-vs-alloc-research-proj} 
+\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/02_metrics_vs_alloc_campus_proj.pdf} 
+%  \caption{Metrics vs SUs for campus champion projects}\label{F:metrics-vs-alloc-campus-proj} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/02_metrics_vs_alloc_startup_proj.pdf} 
+%  \caption{Metrics vs SUs for startup projects}\label{F:metrics-vs-alloc-startup-proj} 
+%\end{figure} 
+ 
+\begin{table}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/metrics_alloc_r.pdf} 
+  \caption{Correlation between SUs allocated vs the metrics for each project}\label{F:metrics-alloc-r} 
+\end{table} 
+ 
+Figure \ref{F:metrics-vs-alloc-proj} shows the correlation analysis of impact metrics and XD resource allocation for an individual project while comparing it to  data from projects. Previous work showed a stronger correlation between the citation and SUs \cite{bollen2011and} in much smaller sample size taken from a specific XSEDE resource allocation meeting. However, we observed a weaker correlation, if any. When categorizing the projects based on the types ( research, startup, campus champion, etc.), it shows a slighty stronger correlation,  although still not as strong in correlation to each category other than for the startup projects/allocations. Figure \ref{F:metrics-vs-alloc-research-proj} showes the analysis for research projects only. Table \ref{F:metrics-alloc-r} lists the correlation coefficient values as well as the p-values showing the significance of the test. Please note in Figure \ref{F:metrics-vs-alloc-proj} and \ref{F:metrics-vs-alloc-research-proj} we included a regression line showing the upper trends of the correlation, i.e., higher SUs allocation correlating to higher impact metrics, but not suggesting a linear relationship. This correlation analysis does not show the cause effect either, as in this case it is very likely that the causal are reciprocal. 
+ 
+\subsection{Metrics vs SUs allocation on FOS level} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/03_metrics_vs_alloc_fos.pdf} 
+  \caption{Metrics vs SUs for FOSes}\label{F:metrics-vs-alloc-fos} 
+\end{figure} 
+
+While on individual project level we do not observe strong correlations between impact metrics and the resource allocations, Figure \ref {F:metrics-vs-alloc-fos} shows stronger positive correlation on the FOS category. The Pearson correlation coefficient are 0.704, 0.712, 0.651, 0.648 respectively. With a degree of freedom at 132 and p-values less than 2.2e-16 from the test, it shows very high statistical significance.  
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/04_hindex_vs_alloc_fos_sized.pdf} 
+%  \caption{h-index (sized by size of FOS) vs allocation}\label{F:hindex-vs-alloc-fos-sized} 
+%\end{figure} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/05_hindexalloc_vs_nprojects_fos_trended.pdf} 
+  \caption{Effects of sizes of FOSes}\label{F:hindexalloc-vs-nprojects-fos-trended} 
+\end{figure} 
+ 
+However as Figure \ref{F:hindexalloc-vs-nprojects-fos-trended} suggests, the stronger correlations are mostly caused by the effect of different size of the FOSes, judging by number of projects each FOS has. However, this does not diminish the purpose of the analysis showing how XSEDE impacts science from different disciplines, e.g., by approving more projects and granting more allocations for certain FOSes. 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/05_alloc_vs_hindex_fos_sized_2in1.pdf} 
+  \caption{SUs vs h-index for each FOS with trend (above) and residual analysis (bottom)}\label{F:alloc-vs-hindex-fos-sized} 
+\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/05_alloc_vs_hindex_fos_sized_trended.pdf} 
+%  \caption{SUs vs h-index for each FOS with trend}\label{F:alloc-vs-hindex-fos-sized-trended} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/05_alloc_vs_hindex_fos_sized_residual.pdf} 
+%  \caption{Residual analysis of SUs vs h-index}\label{F:alloc-vs-hindex-fos-sized-residual} 
+%\end{figure} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/fig3.pdf} 
+  \caption{Interactive SUs vs h-index on FOS level}\label{F:fig3} 
+\end{figure} 
+ 
+Figure \ref{F:alloc-vs-hindex-fos-sized} showes the SUs received (transformed in logarithmic scale) vs the h-index produced for each FOS, while the circle size is proportional to the size (number of projects) of the FOS. It also showes that after removing the fitted trend, we can see a divergence of the SUs received, from the expected SUs trend to produce the given impact judging by h-index. This could imply that certain FOSes are more likely to produce a given impact while some others are requiring more than expected SUs to produce the same impact. To further facilitate this analysis, we have provided an interactive version of the plot in our web portal and depict a screenshot in Figure \ref{F:fig3}. Through this interactive diagram we can make the following observations: 
+ 
+\begin{enumerate} 
+ 
+\item We can compare several FOS with the similar h-index and can easily identify some that use fewer resources than others showing a better relative output measured by the h-index. This is done by comparing FOS on a vertical slice of the h-index as annotated in Figure \ref{F:fig3} 
+ 
+\item The trend introduces a baseline of 0. FOS above 0 use more resources than the trend, FOS bellow 0 use less resources to produce the expected impact based on a given h-index. 
+ 
+\item Some outliers might need more careful investigation, e.g., should more or less resources be given to projects in that FOS? 
+ 
+\end{enumerate} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/08_metrics_vs_alloc_avg_log_fit.pdf} 
+  \caption{Metrics vs SUs for FOS (avg by project)}\label{F:metrics-vs-alloc-avg-log-fit} 
+\end{figure} 
+ 
+\begin{table}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/metrics_alloc_r_fos.pdf} 
+  \caption{Correlation between average SUs allocated vs the average metrics (by projects) for each FOS}\label{F:metrics-alloc-r-fos} 
+\end{table} 
+ 
+As we see, the size of FOS affects significantly the impact as well as the allocations (for h-index as in Figure \ref{F:hindexalloc-vs-nprojects-fos-trended}). We can eliminate this effect by comparing the average by project values within each FOS, as shown in Figure \ref{F:metrics-vs-alloc-avg-log-fit}, while Table \ref{F:metrics-alloc-r-fos} has the values. It shows the weak correlation of per project based metrics vs SUs for the number of publications and citations, which is actually not significantly different than the result from Table \ref{F:metrics-alloc-r}. For h-index and g-index, the test implies no correlation at all was found probably based on that these metrics does not work well when averaging as they are not cumulative and additive values. 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images/06_corr_metrics_vs_alloc_proj_by_fos.pdf} 
+  \caption{Correlations of metrics vs SUs on project level for each FOS}\label{F:corr-metrics-vs-alloc-proj-by-fos} 
+\end{figure} 
+ 
+However as shown in Figure \ref{F:corr-metrics-vs-alloc-proj-by-fos}, within each FOS, the project level metrics vs SUs correlations are typically a bit higher especially for those large size FOSes. With increasing size of the FOS (n=10, n=50, and n=100 are denoted as vertical lines), the correlation appears positively higher and more significant. This suggests that for most FOS, impact metrics does have a positive correlations with SUs allocated. Also by investigating the individual data points, we can see in which FOS this correlation appears much stronger, while for some others there is no correlation at all. 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/fig2.pdf} 
+%  \caption{fig2.}\label{F:fig2} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/fig4.pdf} 
+%  \caption{fig4.}\label{F:fig4} 
+%\end{figure} 
+ 
+%\begin{figure*}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\textwidth]{images/fig5.pdf} 
+%  \caption{fig5.}\label{F:fig5} 
+%\end{figure*} 
+ 
+% from previous summary report 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/02_nmembers_vs_alloc_proj.pdf} 
+%  \caption{fig3.}\label{F:nmembers-vs-alloc-proj} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/05_alloc_vs_nprojects_fos_trended.pdf} 
+%  \caption{fig3.}\label{F:alloc-vs-nprojects-fos-trended} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/05_hindex_vs_nprojects_fos_trended.pdf} 
+%  \caption{fig3.}\label{F:hindex-vs-nprojects-fos-trended} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/07_density_alloc.pdf} 
+%  \caption{fig3.}\label{F:density-alloc} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/07_density_alloc_fos_avg_by_nprojs.pdf} 
+%  \caption{fig3.}\label{F:density-alloc-fos-avg-by-nprojs} 
+%\end{figure} 
+ 
+%\begin{figure}[htb] 
+%  \centering 
+%    \includegraphics[width=1.0\columnwidth]{images/07_density_alloc_proj.pdf} 
+%  \caption{fig3.}\label{F:density-alloc-proj} 
+%\end{figure} 
+ 
+ 
+%\input{evaluation} 
+ 
+\section{Discussion and Ongoing Work} \label{S:conclusion}
+ 
+This paper does not yet address the name ambiguity issue, which deserves dedicated research and in fact numerous research has been done tackling this issue. The root cause of this issue is that the metadata of the publications simply does not include enough information to distinguish similar names that can be uniquely associated to XSEDE user names. This is not a problem specific to our study but for the automated bibliometrics analysis in general, e.g., Google Scholar also include false positive publications in user profile but leave it to the user to curate the results to make it more accurate. In the future we will try to tackle the problem based on other available data - field of science, organization, funding data, co-author relationship etc. while conducting unsupervised machine learning techniques like k-means clustering as well as the introduction of a social network graph that analyses the authorship for ambiguity and identifies a likelihood.
+ 
+As the ultimate approach is to let users vetting their publication list, we would try to include such assisting processes into the workflow of vetting the papers. One pathway we currently pursue is to work with the XSEDE portal team while providing the publication data we have collected as a suggestion service, in the hope to provide more convenient way for users to quickly populate the vetted publications library. 
+ 
+We have also started another similar activity, in which we wanted to extracting and parsing the publication data from past TeraGrid/XSEDE quarterly reports. This data, while not curated on per user basis, do have project level association information thus could serve quite well for most of our analysis. 
+ 
+As already mentioned, another activity we are conducting is social networking related analysis among publications, users, projects, FOSes, etc. based on citation and co-authorship relations. 
+ 
+\section{Summary}
+
+TBD 
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Acknowledgment 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+ 
+%ACKNOWLEDGMENTS are optional 
+%\section{Acknowledgments} 
+ 
+\section*{Acknowledgement} 
+ 
+This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI 1025159. 
+ 
+%\clearpage 
+ 
+\bibliographystyle{IEEEtranS} 
+%\bibliographystyle{abbrv} 
+\bibliography{% 
+%bib/references,% 
+%bib/vonLaszewski-jabref,% 
+%bib/image-refs,% 
+%bib/cyberaide-cloud,% 
+%bib/python,% 
+tas.bib} 
+ 
+\end{document} 
+ 
+ 

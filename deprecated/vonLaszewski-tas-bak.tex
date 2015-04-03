@@ -1,0 +1,165 @@
+\documentclass{sig-alternate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LATEX DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{todonotes}
+\usepackage{rotating}
+\usepackage{color}
+
+\newcommand*\rot{\rotatebox{90}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%
+% --- Author Metadata here ---
+\conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
+\CopyrightYear{2014} 
+\crdata{X-XXXXX-XX-X/XX/XX}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Sicientific Impact Metrics for XSEDE%
+\titlenote{(Produces the permission block, and
+copyright information). For use with
+SIG-ALTERNATE.CLS. Supported by ACM.}}
+\subtitle{[Extended Abstract]
+\titlenote{A full version of this paper is available as
+\texttt{www.acm.org/eaddress.htm}}}
+
+\numberofauthors{4} 
+\author{
+\alignauthor
+Gregor von Laszewski\titlenote{Corresponding Author.}\\
+       \affaddr{Indiana University}\\
+       \affaddr{2719 10th Street}\\
+       \affaddr{Bloomington, Indiana, U.S.A.}\\
+       \email{laszewski@gmail.com}
+% 2nd. author
+\alignauthor
+Fugang Wang\\
+       \affaddr{Indiana University}\\
+       \affaddr{2719 10th Street}\\
+       \affaddr{Bloomington, Indiana, U.S.A.}\\
+% 3rd. author
+\alignauthor
+Geoffrey C. Fox\\
+       \affaddr{Indiana University}\\
+       \affaddr{2719 10th Street}\\
+       \affaddr{Bloomington, Indiana, U.S.A.}\\
+\and  % use '\and' if you need 'another row' of author names
+% 4th. author
+\alignauthor 
+Tom Furlani\\
+       \affaddr{CRC}\\
+       \affaddr{Street}\\
+       \affaddr{Buffalo NY, 47401}
+}
+\date{13 March 2014}
+
+
+% A category with the (minimum) three required fields
+%\category{H.4}{Information Systems Applications}{Miscellaneous}
+%A category including the fourth, optional field follows...
+%\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
+
+\terms{Theory}
+
+\keywords{h-index, metric, FutureGrid, Technology audit, XSEDE}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TOC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LIST OF TODOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\listoftodos
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TITLE OF PAPER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagenumbering{arabic}
+
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ABSTRACT OF PAPER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{abstract}
+
+TBD
+
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{introduction}
+
+\input{requirements}
+
+\input{design}
+
+\input{implementation}
+
+\input{related}
+
+\input{evaluation}
+
+\input{conclusion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acknowledgment
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{Acknowledgement}
+
+TAS Grant ... \todo{tas grant}
+
+Some of the text published in this chapter is available form the
+FutureGrid portal. The FutureGrid project is funded by the National
+Science Foundation (NSF) and is led by Indiana University with
+University of Chicago, University of Florida, San Diego Supercomputing
+Center, Texas Advanced Computing Center, University of Virginia,
+University of Tennessee, University of Southern California, Dresden,
+Purdue University, and Grid 5000 as partner sites. This material is
+based upon work supported in part by the National Science Foundation
+under Grant No. 0910812. If you use FutureGrid and produce a paper or
+presentation, we ask you to include the reference
+\cite{las2010gce,las12fg-bookchapter}.
+
+\bibliographystyle{IEEEtranS}
+\bibliography{%
+bib/references,%
+bib/vonLaszewski-jabref,%
+bib/image-refs,%
+bib/cyberaide-cloud,%
+bib/python}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\clearpage
+
+%\appendix
+
+\end{document}
