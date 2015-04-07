@@ -150,10 +150,65 @@ We present a framework that (a) integrates publication and citation data retriev
 
 \section{XSEDE}
 
-TeraGrid/XSEDE publications peers comparison – Field of Science analysis
+\subsection{TeraGrid/XSEDE\cite{www-xsede} publications peers comparison}
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-stacked.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*}
+
+\begin{figure}[htb]
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/xd_peers_density.pdf} 
+  \caption{Kernel density of distributions for XSEDE publication percentile ranking versus peers}\label{F:xd_peers_density} 
+\end{figure}
+
+Figure \ref{F:xd_peers_density} shows the kernel density of the distributions 
+of XSEDE publications' percentile ranking and that of peers'. It shows XSEDE 
+publications tend to have higher percentile ranking. 
+
+Table \ref{T:groups_stats} listed the average and median rankings and citations received of the two groups to evaluate and compare.
+\begin{table}[h]
+\begin{tiny}
+\begin{tabular}{p{0.2\columnwidth}rrrrrr}
+ &  & Avg & Median & Avg & Median \\
+ & \# pubs & rank & rank & cite & cite \\
+\hline
+XD & 2349	& 61	& 65	& 26	& 11 \\
+peers & 168422	& 49	& 48	& 13	& 5 \\
+\end{tabular}
+\end{tiny}
+\caption{Basic statistics of XSEDE publications group and peers group}
+\label{T:groups_stats}
+\end{table}
+
+We can performe T-test to show the statistic significance. The results show that XSEDE group has statistically higher ranking as well as absolute citation than the peers group does.
+
+\begin{enumerate}
+\item T-test for ranking (Welch Two sample t-test)
+\begin{enumerate}
+\item T=21.4134, df=2412.99, p-value<2.2e-16
+\item 95\% confidence interval: $[10.80, 12.98]$
+\end{enumerate}
+\item T-test for citation count:
+\begin{enumerate}
+\item T=7.057, df=2358.929, p-value=2.228e-12
+\item 95\% confidence interval: $[9.40, 16.63]$
+\end{enumerate}
+\end{enumerate}
+ 
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-bar-by-score.pdf} 
+  \caption{xsede journal bar by score}\label{F:xsede-score} 
+\end{figure*}
+
+\subsection{Field of Science analysis}
 
 
-For the percentile ranking of TG/XD publications among the journal issues where each publication was published, we aggregate them based on Field of Science (FOS), according to the categories defined in XSEDE central database (XDCDB), and calculate the average and median percentile ranking for each field of science, as well as a ``performance score'' that will be defined below in detail.
+For the percentile ranking of TG/XD publications among the journal issues where each publication was published, we aggregate them based on Field of Science (FOS), according to the categories defined in XSEDE central database (XDCDB), and calculate the average and median percentile ranking for each field of science, as well as a \emph{performance score} that will be defined below in detail.
 
 We include only those with at least five publications so the results
 are not statistically meaningless. To identify the FOS for each
@@ -334,7 +389,7 @@ Computer and Information Science and Engineering  &   50  &  46  & 0.01 \\
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/ncar-c.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
+  \caption{xsede stacked}\label{F:ncar-score}
 \end{figure*} 
 
 
@@ -346,7 +401,7 @@ A text file with 880 publications curated by NCAR.
 
 Processing:
 \begin{enumerate}
-\item	Parsed the text file and pub publications into structured database -- title, doi
+\item	Parsed the text file and pub publications into structured database -- title, doi.
 \item	Query ISI Web of Knowledge to get detailed information of the publications -- journal name, issue, citation data, etc. We were able to verify and obtain data for 813 publications.
 \item	Identify and obtain peers data based on journal issue information. In total 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than 5 publications appeared on them. This leads to 35 different journals that cover 653 identical publications. Out of the 35 journals, we had peers data for 12 of them (based on what we had for XSEDE peers comparison). For the other 23 journals, we obtained additionally 39k peer publication data.
 \item	For each NCAR publication, computing the percentile ranking among peers within the same journal issue (against ALL publication entries as obtained from ISI Web of Knowledge).
@@ -384,11 +439,7 @@ RAW data:
 \item	Stacked column chart showing percentage of percentile ranking that falls into each ranking quarter for each journal (Q1 stands for the top 1st quarter)
 \end{enumerate}
 
-We also compute a ``performance score'' for each journal for easy comparison. The performance score is defined as:
-–	S = 1*PQ1 + 0.5*PQ2+ (-0.5)*PQ3 + (-1)*PQ4
-In which, PQi is the percentage of pubs falling into the top i quarter. PQi gets the value in [0,1] and ΣPQi = 1 for one FOS.
-
-It's trivial to see that S has its value from [-1, 1]. A Positive value implies more publications appear on upper half in ranking and negative means more on lower half.
+We also computed and compared the \emph{performance score} as defined earlier. The result is shown in Figure \ref{F:ncar-score}.
 
 
 \clearpage
@@ -440,7 +491,7 @@ It's trivial to see that S has its value from [-1, 1]. A Positive value implies 
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/ncar-journal-bar-by-score.pdf} 
-  \caption{ncar score}\label{F:ncar-score} 
+  \caption{ncar score}\label{F:ncar-score1} 
 \end{figure*} 
 
 \begin{figure*}[htb] 
