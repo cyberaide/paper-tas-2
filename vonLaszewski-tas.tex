@@ -148,6 +148,248 @@ We present a framework that (a) integrates publication and citation data retriev
 % SECTIONS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
+\section{XSEDE}
+
+TeraGrid/XSEDE publications peers comparison – Field of Science analysis
+
+
+For the percentile ranking of TG/XD publications among the journal issues where each publication was published, we aggregate them based on Field of Science (FOS), according to the categories defined in XSEDE central database (XDCDB), and calculate the average and median percentile ranking for each field of science, as well as a ‘performance score’ that will be defined below in detail.
+
+We include only those with at least five publications so the results
+are not statistically meaningless. To identify the FOS for each
+publication, we followed this:
+
+\begin{enumerate}
+
+\item	Publications from past TG/XD quarterly reports may have had FOS information explicitly associated with them;
+\item	Find FOS information based on project data in XDCDB. It’s
+  possible that one project is associated with multiple FOS, in which
+  case, we counted that publication into all involved FOS.
+\begin{enumerate}
+\item	Some publications from TG/XD quarterly reports had only project proposal number. We can map them to the project charge number and account id used internally within XSEDE central database;
+\item	For user uploaded publications data from XSEDE user portal, a project charge number would be associated with them.
+\end{enumerate}
+\end{enumerate}
+
+The performance score is defined as:
+
+\[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
+
+In which, $P_{Q_i}$ is the percentage of pubs falling into the top i
+quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum {P_{Q_i}} = 1$ for one FOS.
+
+It’s trivial to see that S has its value from $[-1, 1]$. A Positive value implies more publications appear on upper half in ranking and negative means more on lower half.
+
+The results are shown in the following chart, sorted by the performance score in descending order:
+
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/a.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*} 
+
+
+Note: The result was based on FOS data that were originally assigned/associated in the past reports or previously assigned project affiliation data. FOS in a higher level (as a parent FOS) might be showing here but the values might be changing in later analysis after aggregating more children FOS into that parent FOS.
+
+The table with the detailed information:
+
+\begin{table}[h]
+\begin{tiny}
+\begin{tabular}{p{0.6\columnwidth}rrr}
+% \begin{tabular}{lrrr}
+         &  Number &  average &     \\
+FOS   &  \# Pubs &  ptrank   &     score \\
+\hline
+Galactic Astronomy &  14 & 81 &  0.86 \\
+Extragalactic Astronomy and Cosmology &  57 &  74 &  0.68 \\
+Gravitational Physics &  104 &    74 &  0.60 \\
+Nuclear Physics & 5 &   69 &  0.60 \\
+Ocean Sciences  & 5 &   76 &  0.60 \\
+Astronomical Sciences &  187 &    72 &  0.57 \\
+Integrative Biology and Neuroscience &   7 &   77 &  0.57 \\
+Electrical and Communication Systems &   54 &  72 &  0.55 \\
+Planetary Astronomy &    10 &  69 &  0.55 \\
+Stellar Astronomy and Astrophysics &  31 &  72 &  0.53 \\
+Theoretical Physics &    49 &  70 &  0.51 \\
+Physical Oceanography &  5 &   65 &  0.50 \\
+Earth Sciences  & 19 &  64 &  0.47 \\
+Physics & 147 &    67 &  0.45 \\
+Atomic, Molecular, and Optical Physics  & 55 &  68 &  0.45 \\
+Systematic and Population Biology &   37 &  66 &  0.41 \\
+Magnetospheric Physics  & 11 &  65 &  0.41 \\
+Solar Terrestrial Research &  10 &  66 &  0.40 \\
+Elementary Particle Physics &    27 &  66 &  0.39 \\
+Mechanics and Materials & 14 &  66 &  0.39 \\
+Solid State Chemistry and Polymers &  8 &   65 &  0.38 \\
+Atmospheric Sciences &   44 &  63 &  0.35 \\
+Biological and Critical Systems & 6 &   60 &  0.33 \\
+Molecular Biosciences &  494 &    63 &  0.32 \\
+Geophysics &  8 &   61 &  0.31 \\
+Computational Mathematics &   9 &   60 &  0.28 \\
+Biophysics &  323 &    60 &  0.25 \\
+Physical Chemistry &  168 &    60 &  0.25 \\
+Chemistry &   259 &    58 &  0.22 \\
+Fluid, Particulate, and Hydraulic Systems &   51 &  58 & 0.18 \\
+Materials Research &  305 &    55 &  0.17 \\
+Condensed Matter Physics &    61 &  55 &  0.17 \\
+Biochemistry and Molecular Structure and Function &   141 &    53 &  0.08 \\
+Organic and Macromolecular Chemistry &   44 &  51 &  0.07 \\
+Analytical and Surface Chemistry &    7 &   54 &  0.07 \\
+Metals, Ceramics, and Electronic Materials &  11 &  48 & 0.05 \\
+Cross-Disciplinary Activities &  26 &  53 &  0.04 \\
+Chemical, Thermal Systems &   38 &  51 &  0.03 \\
+Chemical and Reaction Processes & 31 &  54 &  0.03 \\
+Interfacial, Transport, and Separations Processes &   17 &  48 &  0.03 \\
+Advanced Scientific Computing &  18 &  48 &  0.00 \\
+Computer and Computation Research &   14 &  49 &  -0.04 \\
+Mechanical and Structural Systems &   14 &  44 &  -0.18 \\
+Geometric Analysis &  5 &   44 &  -0.40 \\
+Training &    5 &   34 &  -0.40 \\
+Experimental and Theoretical Geochemistry &   5 &   34 & -0.50 \\
+\end{tabular}
+\end{tiny}
+\end{table}
+
+We furthermore aggregate the results based on their parents FOS, and
+finally to the top level FOS category, as defined by NSF. The results
+(chart and raw data) are shown as below.
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/b.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*} 
+
+
+\begin{table}[h]
+\begin{tiny}
+\begin{tabular}{p{0.5\columnwidth}rrr}
+% \begin{tabular}{lrrr}
+       & Avgerage  & Median  &  \\
+FOS & ptrank & ptrank & Score \\
+\hline
+Astronomical Sciences & 74 & 81 & 0.65 \\
+Physics & 71 & 79 & 0.53 \\
+Ocean Sciences & 65 & 58 & 0.5 \\
+Environmental Biology & 66 & 75 & 0.41 \\
+Geosciences & 64 & 70 & 0.4 \\
+Mechanical and Structural Systems &  66 & 71 & 0.39 \\
+Biological Sciences & 63 & 68 & 0.33 \\
+Mathematical and Physical Sciences & 61 & 66 & 0.31 \\
+Atmospheric Sciences &  61 & 65 & 0.29 \\
+Engineering & 61 & 66 & 0.27 \\
+Chemistry &  58 & 60 & 0.21 \\
+Molecular Biosciences & 58 & 60 & 0.2 \\
+Materials Research & 55 & 55 & 0.17 \\
+Mathematical Sciences & 58 & 58 & 0.13 \\
+Chemical, Thermal Systems &  55 & 54 & 0.12 \\
+Computer and Information Science and Engineering & 51 & 46 & 0.03 \\
+Earth Sciences & 51 & 45 & 0 \\
+Electrical and Communication Systems &  50 & 52 &  0 \\
+\end{tabular}
+\end{tiny}
+\end{table}
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/c.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*} 
+
+
+\begin{table}[h]
+\begin{tiny}
+\begin{tabular}{p{0.5\columnwidth}rrr}
+% \begin{tabular}{lrrr}
+       & Avgerage  & Median  &  \\
+FOS & ptrank & ptrank & Score \\
+\hline
+Mathematical and Physical Sciences  &  63  &  68  &  0.35 \\
+Geosciences  &  62  &  67  &  0.33 \\
+Biological Sciences  &  61  &  64  &  0.27 \\
+Engineering  &  58  &  62  &  0.2 \\
+Computer and Information Science and Engineering  &   50  &  46  & 0.01 \\
+\end{tabular}
+\end{tiny}
+\end{table}
+
+
+\section{NCAR}
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/ncar-a.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*} 
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/ncar-b.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*} 
+
+\begin{figure*}[htb] 
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/ncar-c.pdf} 
+  \caption{xsede stacked}\label{F:xsede-stacked} 
+\end{figure*} 
+
+
+NCAR publication analysis by comparing percentile ranking among peers
+
+
+Original data:
+A text file with 880 publications curated by NCAR.
+
+Processing:
+\begin{enumerate}
+\item	Parsed the text file and pub publications into structured database – title, doi
+\item	Query ISI Web of Knowledge to get detailed information of the publications – journal name, issue, citation data, etc. We were able to verify and obtain data for 813 publications.
+\item	Identify and obtain peers data based on journal issue information. In total 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than 5 publications appeared on them. This leads to 35 different journals that cover 653 identical publications. Out of the 35 journals, we had peers data for 12 of them (based on what we had for XSEDE peers comparison). For the other 23 journals, we obtained additionally 39k peer publication data.
+\item	For each NCAR publication, computing the percentile ranking among peers within the same journal issue (against ALL publication entries as obtained from ISI Web of Knowledge).
+\item	Group the percentile ranking scores based on each journal, and divide the scores into each ranking quarters (Q1: top 25%; Q2: 25%~50%; and so on). Compute the percentile for those that fall into each ranking quarter.
+\item	Plot the results in a stacked column chart.
+\end{enumerate}
+
+Results:
+\begin{enumerate}
+\item	Journals distribution showing top 10 journals based on \# of publications.
+\end{enumerate}
+
+So the top 10 journals (totally 484 publications) accounted for about 3 quarters of the 653 publications from the 35 journals with at least five publications appeared on them; or 60% of the 813 publications from the 130 journals we identified via ISI source.
+
+RAW data:
+
+\begin{table}[h]
+\begin{tiny}
+\begin{tabular}{rl}
+110	&  Journal of Climate \\
+72	&  Journal of Geophysical Research-Atmospheres \\
+66	&  Geophysical Research Letters \\
+56	&  Atmospheric Chemistry and Physics \\
+53	&  Monthly Weather Review \\
+42	&  Journal of the Atmospheric Sciences \\
+35	&  Climate Dynamics \\
+19	&  Journal of Geophysical Research-Space Physics \\
+16	&  Journal of Geophysical Research-Oceans \\
+15	&  Journal of Hydrometeorology \\
+\end{tabular}
+\end{tiny}
+\end{table}
+
+\begin{enumerate}
+\item	Stacked column chart showing percentage of percentile ranking that falls into each ranking quarter for each journal (Q1 stands for the top 1st quarter)
+\end{enumerate}
+
+We also compute a ‘performance score’ for each journal for easy comparison. The performance score is defined as:
+–	S = 1*PQ1 + 0.5*PQ2+ (-0.5)*PQ3 + (-1)*PQ4
+In which, PQi is the percentage of pubs falling into the top i quarter. PQi gets the value in [0,1] and ΣPQi = 1 for one FOS.
+
+It’s trivial to see that S has its value from [-1, 1]. A Positive value implies more publications appear on upper half in ranking and negative means more on lower half.
+
+
+
 \begin{figure}[htb] 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
