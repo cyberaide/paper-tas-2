@@ -346,7 +346,7 @@ A text file with 880 publications curated by NCAR.
 
 Processing:
 \begin{enumerate}
-\item	Parsed the text file and pub publications into structured database – title, doi
+\item	Parsed the text file and pub publications into structured database -- title, doi
 \item	Query ISI Web of Knowledge to get detailed information of the publications -- journal name, issue, citation data, etc. We were able to verify and obtain data for 813 publications.
 \item	Identify and obtain peers data based on journal issue information. In total 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than 5 publications appeared on them. This leads to 35 different journals that cover 653 identical publications. Out of the 35 journals, we had peers data for 12 of them (based on what we had for XSEDE peers comparison). For the other 23 journals, we obtained additionally 39k peer publication data.
 \item	For each NCAR publication, computing the percentile ranking among peers within the same journal issue (against ALL publication entries as obtained from ISI Web of Knowledge).
