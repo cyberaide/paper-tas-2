@@ -8,13 +8,14 @@
 %
 \documentclass{sig-alternate}
 
-\newcommand{\TITLE}{Towards a Scientific Impact Measuring Framework for Large Computing Facilities - a Case Study on XSEDE}
+\newcommand{\TITLE}{Peer comparison of XSEDE and NCAR publication data}
 \newcommand{\AUTHOR}{Gregor von Laszewski, Fugang Wang}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LATEX DEFINITIONS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{comment}
 \usepackage{hyperref} 
 \usepackage{array} 
 \usepackage{graphicx} 
@@ -126,6 +127,23 @@ Robert L. DeLeon\\
 
 \begin{abstract}
 
+
+  We present a framework to compare publication impact based on a
+  comprehensive peer analysis conducted by papers produced by
+  scientists using XSEDE and NCAR resources.  The analysis is based on
+  a ranking while comparing the number of citations in publications
+  that have been associated with XSEDE and NCAR in journals to other
+  publications in the same journal issues. As a result we find that
+  XSEDE and NCAR reported publications achieve a higher score versus
+  their peers.
+
+  This analysis is unique in that it is a comprehensive study
+  involving thousands of published papers. While analyzing the number
+  of citations we can see that citations of paper that utilize XSEDE
+  and NCAR resources are positive.
+
+OLD:
+
 We present a framework that (a) integrates publication and citation data retrieval, (b) allows scientific impact metrics generation at different aggregation levels, and (c) provides correlation analysis of impact metrics based on publication and citation data with resource allocation for a computing facility. Furthermore, we use this framework to conduct a scientific impact metrics evaluation of XSEDE. We carry out an extensive statistical analysis correlating XSEDE allocation size to the impact metrics aggregated by project and field of science. This analysis not only helps to provide an indication of XSEDE's scientific impact, but also provides insight regarding maximizing the return on investment in terms of allocation by taking into account the field of science or project based impact metrics. The findings from this analysis can be utilized by the XSEDE resource allocation committee to help assess and identify projects with higher scientific impact. It can also help provide metrics regarding the return on investment for XSEDE resources, or other institutional or campus resources for which an analysis of impact based on publications is important.
  
 \end{abstract}
@@ -155,7 +173,7 @@ We present a framework that (a) integrates publication and citation data retriev
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-stacked.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
+  \caption{xsede stacked 0}\label{F:xsede-stacked} 
 \end{figure*}
 
 \begin{figure}[htb]
@@ -169,8 +187,12 @@ of XSEDE publications' percentile ranking and that of peers'. It shows XSEDE
 publications tend to have higher percentile ranking. 
 
 Table \ref{T:groups_stats} listed the average and median rankings and citations received of the two groups to evaluate and compare.
+
 \begin{table}[h]
-\begin{tiny}
+\caption{Basic statistics of XSEDE publications group and peers group}
+\label{T:groups_stats}
+\centering
+\begin{small}
 \begin{tabular}{p{0.2\columnwidth}rrrrrr}
  &  & Avg & Median & Avg & Median \\
  & \# pubs & rank & rank & cite & cite \\
@@ -178,9 +200,7 @@ Table \ref{T:groups_stats} listed the average and median rankings and citations 
 XD & 2349	& 61	& 65	& 26	& 11 \\
 peers & 168422	& 49	& 48	& 13	& 5 \\
 \end{tabular}
-\end{tiny}
-\caption{Basic statistics of XSEDE publications group and peers group}
-\label{T:groups_stats}
+\end{small}
 \end{table}
 
 We can performe T-test to show the statistic significance. The results show that XSEDE group has statistically higher ranking as well as absolute citation than the peers group does.
@@ -231,7 +251,7 @@ The performance score is defined as:
 \[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
 
 In which, $P_{Q_i}$ is the percentage of pubs falling into the top i
-quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum {P_{Q_i}} = 1$ for one FOS.
+quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS.
 
 It's trivial to see that S has its value from $[-1, 1]$. A Positive value implies more publications appear on upper half in ranking and negative means more on lower half.
 
@@ -241,22 +261,32 @@ The results are shown in the following chart, sorted by the performance score in
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/a.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
+  \caption{xsede stacked 1}\label{F:xsede-stacked} 
 \end{figure*} 
 
 
 Note: The result was based on FOS data that were originally assigned/associated in the past reports or previously assigned project affiliation data. FOS in a higher level (as a parent FOS) might be showing here but the values might be changing in later analysis after aggregating more children FOS into that parent FOS.
 
-The table with the detailed information is shown in Table \ref{T:xsede-raw-1}
 
+
+\newcommand{\tablefont}{tiny}
+
+The table with the detailed information is shown in Table
+\ref{T:xsede-raw-1}
+
+\begin{comment}
 \begin{table}[h]
-\begin{tiny}
-\caption{ABC}
+\caption{Overview of the number of publications, average percentile
+  ranking and performance score for XSEDE publication data based on
+  Fiedl of science.}
 \label{T:xsede-raw-1}
+\centering
+{\small
 \begin{tabular}{p{0.6\columnwidth}rrr}
 % \begin{tabular}{lrrr}
-         &  Number &  average &     \\
-FOS   &  \# Pubs &  ptrank   &     score \\
+
+
+FOS   & \rot{\shortstack[1]{ Number\\ of Pubs}} &  \rot{\shortstack[1]{average\\ ptrank}}   &    \rot{Score} \\
 \hline
 Galactic Astronomy &  14 & 81 &  0.86 \\
 Extragalactic Astronomy and Cosmology &  57 &  74 &  0.68 \\
@@ -305,8 +335,9 @@ Geometric Analysis &  5 &   44 &  -0.40 \\
 Training &    5 &   34 &  -0.40 \\
 Experimental and Theoretical Geochemistry &   5 &   34 & -0.50 \\
 \end{tabular}
-\end{tiny}
+}
 \end{table}
+\end{comment}
 
 We furthermore aggregate the results based on their parents FOS, and
 finally to the top level FOS category, as defined by NSF. The results
@@ -315,16 +346,19 @@ finally to the top level FOS category, as defined by NSF. The results
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/b.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
+  \caption{xsede stacked 2}\label{F:xsede-stacked} 
 \end{figure*} 
 
 
 \begin{table}[h]
-\begin{tiny}
+\caption{Percentile ranking and score of XSEDE publicatiopn data
+  grouped by parent field of science.}
+\label{T:xsede-average-median-percentil-rancing-parent}
+\centering
+{\small
 \begin{tabular}{p{0.5\columnwidth}rrr}
 % \begin{tabular}{lrrr}
-       & Avgerage  & Median  &  \\
-FOS & ptrank & ptrank & Score \\
+FOS   & \rot{\shortstack[1]{Number\\ of Pubs}} &  \rot{\shortstack[1]{average\\ ptrank}}   &    \rot{Score} \\
 \hline
 Astronomical Sciences & 74 & 81 & 0.65 \\
 Physics & 71 & 79 & 0.53 \\
@@ -345,22 +379,24 @@ Computer and Information Science and Engineering & 51 & 46 & 0.03 \\
 Earth Sciences & 51 & 45 & 0 \\
 Electrical and Communication Systems &  50 & 52 &  0 \\
 \end{tabular}
-\end{tiny}
+}
 \end{table}
 
-\begin{figure*}[htb] 
-  \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/c.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
-\end{figure*} 
+\begin{figure}[htb] 
+  \centering  
+    \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
+  \caption{xsede stacked c}\label{F:xsede-stacked} 
+\end{figure} 
 
 
 \begin{table}[h]
-\begin{tiny}
+\caption{The top level Field of Sciences in XSEDE as defined by NSF}
+\label{T:xsede-all-fos}
+\centering
+{\small
 \begin{tabular}{p{0.5\columnwidth}rrr}
 % \begin{tabular}{lrrr}
-       & Avgerage  & Median  &  \\
-FOS & ptrank & ptrank & Score \\
+FOS & \rot{\shortstack[1]{Avarage \\ ptrank}} & \rot{\shortstack[1]{Median \\ ptrank}} & \rot{Score} \\
 \hline
 Mathematical and Physical Sciences  &  63  &  68  &  0.35 \\
 Geosciences  &  62  &  67  &  0.33 \\
@@ -368,28 +404,28 @@ Biological Sciences  &  61  &  64  &  0.27 \\
 Engineering  &  58  &  62  &  0.2 \\
 Computer and Information Science and Engineering  &   50  &  46  & 0.01 \\
 \end{tabular}
-\end{tiny}
+}
 \end{table}
 
 
 \section{NCAR}
 
-\begin{figure*}[htb] 
+\begin{figure}[htb] 
   \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/ncar-a.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
-\end{figure*} 
+    \includegraphics[width=1.0\columnwidth]{images-new/ncar-a.pdf} 
+  \caption{Pie Chart ncar stacked a}\label{F:ncar-stacked-a} 
+\end{figure} 
 
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/ncar-b.pdf} 
-  \caption{xsede stacked}\label{F:xsede-stacked} 
+  \caption{ncar stacked b}\label{F:ncar-stacked-b} 
 \end{figure*} 
 
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/ncar-c.pdf} 
-  \caption{xsede stacked}\label{F:ncar-score}
+  \caption{ncar stacked c}\label{F:ncar-score}
 \end{figure*} 
 
 
@@ -414,25 +450,32 @@ Results:
 \item	Journals distribution showing top 10 journals based on \# of publications.
 \end{enumerate}
 
-So the top 10 journals (totally 484 publications) accounted for about 3 quarters of the 653 publications from the 35 journals with at least five publications appeared on them; or 60\% of the 813 publications from the 130 journals we identified via ISI source.
-
-RAW data:
+The top 10 journals (totally 484 publications) accounted for about
+3 quarters of the 653 publications from the 35 journals with at least
+five publications appeared on them; or 60\% of the 813 publications
+from the 130 journals we identified via ISI source (see Table~\ref{T:ncar-pub-count-venue}).
 
 \begin{table}[h]
-\begin{tiny}
+\caption{Top ten journals with the most publicationsns of NCAR
+  publication data}
+\label{T:ncar-pub-count-venue}
+{\small
 \begin{tabular}{rl}
-110	&  Journal of Climate \\
-72	&  Journal of Geophysical Research-Atmospheres \\
-66	&  Geophysical Research Letters \\
-56	&  Atmospheric Chemistry and Physics \\
-53	&  Monthly Weather Review \\
-42	&  Journal of the Atmospheric Sciences \\
-35	&  Climate Dynamics \\
-19	&  Journal of Geophysical Research-Space Physics \\
-16	&  Journal of Geophysical Research-Oceans \\
-15	&  Journal of Hydrometeorology \\
+Publication & Publication\\
+Venue & Count \\
+\hline
+ Journal of Climate & 110	\\
+ Journal of Geophysical Research-Atmospheres & 72	\\
+ Geophysical Research Letters & 66	\\
+ Atmospheric Chemistry and Physics & 56	\\
+ Monthly Weather Review & 53	\\
+ Journal of the Atmospheric Sciences & 42	\\
+ Climate Dynamics & 35	\\
+ Journal of Geophysical Research-Space Physics & 19	\\
+ Journal of Geophysical Research-Oceans & 16	\\
+ Journal of Hydrometeorology & 15	\\
 \end{tabular}
-\end{tiny}
+}
 \end{table}
 
 \begin{enumerate}
@@ -499,6 +542,27 @@ We also computed and compared the \emph{performance score} as defined earlier. T
     \includegraphics[width=1.0\textwidth]{images-new/journals_bar_by_score.pdf} 
   \caption{journal score}\label{F:jounarl-score} 
 \end{figure*} 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Acknowledgment 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\section{Acknowledgments}
+
+ 
+This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI 1025159. Lessons learned from FutureGrid have significantly influenced this work. Gathering publications has first been pioneered by FutureGrid influencing the development in the XSEDE portal. We would like to thank Matt Hanlon and Maytal Dahan for their efforts to integrate this framework into the XSEDE portal. We would like to thank Barbara O'Leary for her help in reviewing this paper.
+ 
+%\bibliographystyle{IEEEtranS}
+%\bibliographystyle{IEEEtran}
+\bibliographystyle{abbrvurl} 
+\bibliography{% 
+bib/tas.bib} 
+
+%\balancecolumns
+\end{document}
+
 
 
 \section{Introduction} 
@@ -721,24 +785,6 @@ This paper presents a framework to facilitate the measuring of scientific impact
 \end{enumerate} 
 
 It is obvious that continuous work is crucial to conduct longitudinal tracking of the data and deal with the issues that XSEDE has so far provided limited amount of publication data. Important is to note that this work has pioneered the workflow and the analysis capability on how to achieve the data gathering. This framework can be reused by various groups enabling different services as part of XSEDE to assist the portal and auditing teams. Moreover, this framework and its service oriented model makes it possible to expand its usage beyond those targeted by XSEDE resources. It could be employed within other organizations such as Department of Energy (DOE) or even a department of a university. Those that would like to consult with us on such specializations, can contact us for further details.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% Acknowledgment 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\section{Acknowledgments}
-
- 
-This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI 1025159. Lessons learned from FutureGrid have significantly influenced this work. Gathering publications has first been pioneered by FutureGrid influencing the development in the XSEDE portal. We would like to thank Matt Hanlon and Maytal Dahan for their efforts to integrate this framework into the XSEDE portal. We would like to thank Barbara O'Leary for her help in reviewing this paper.
- 
-%\bibliographystyle{IEEEtranS}
-%\bibliographystyle{IEEEtran}
-\bibliographystyle{abbrvurl} 
-\bibliography{% 
-bib/tas.bib} 
-
-%\balancecolumns
-\end{document}
 
 
 
