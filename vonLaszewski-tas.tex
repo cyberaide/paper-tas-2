@@ -163,7 +163,131 @@ performance measures]
   Service, XDMoD, XSEDE}
 
 
-\section{Introduction}
+\section{Introduction} 
+
+Many recent science and engineering innovations and discoveries are
+increasingly dependent on access to high performance computing
+resources \cite{las14impact}. The demand for high end resources is is
+met by large-scale compute resources that cannot typically be
+supported by any single research group. Accordingly, dedicated
+large-scale computing facilities play an important role in scientific
+research, in which resources are shared among groups of researchers,
+while the facilities themselves are managed by dedicated staff. The
+National Science Foundation and the Department of Energy have
+supported such facilities for many years. One such facility is the
+Extreme Science and Discovery Environment (XSEDE) \cite{www-xsede,xsede}.
+XSEDE allocates resources to approved projects, which represent a
+substantial financial investment by NSF. Thus, justification for their
+use is warranted and questions regarding the scientific impact of
+these resources naturally arise. In our previous work we have
+\cite{las14impact} focused on the creation of an framework that
+collects bibliometric data and analyzes them in regards to a number of
+metrics. However, this work did not yet include a mechanism to compare
+them with peers not using such resources. 
+
+In this paper we significantly enhance our previous work by comparing
+publication impact based on a comprehensive peer analysis conducted by
+papers produced by scientists using XSEDE and NCAR resources.
+
+The analysis is based on a percentile ranking of citations of the
+papers while comparing them between to peer publication in the same
+journal not using the specific resources.  This analysis is unique
+in that it is a comprehensive study involving thousands of published
+papers while associating them to a comparable peer group based on
+the journals issues.
+
+While analyzing the number of citations we can see that citations of
+paper that utilize XSEDE and NCAR resources are positive.  Hence we
+find that XSEDE and NCAR reported publications achieve a higher
+score versus their peers from the same journal issue not using these
+resources.
+
+The paper is structured as follows. First we review some portions of
+our previous work while focussing on how this work is related to it.
+Next we introduce a journal based peer metric that allows us to
+compare XSEDE related publications with non XSEDE related publication.
+To demonstrate general applicability of this method we introduce in
+the next section a peer analysis of NCAR data. We present important
+statistics about this metric for both XSEDE and NCAR. in its relevant
+sections. Finally we present our conclusions.
+
+\section{Bibliometric Data Analysis \\Framework for Resource \\Providers}
+
+The work described in this paper has been motivated by analyzing data
+related to XSEDE. However, as many other resource providers may have
+the same demand this framework can be applied to other resource
+providers. In case this is desired, a custom analysis can be
+performed by the team from Indiana University. Our framework is
+general enough that it can be applied to other resource providers.
+
+\subsection{Requirements}
+
+The motivation of the framework is focussing on three main objectives.
+First, we like our framework to be able to compare the impact the
+resource or resources have on the users using them. Second we have to
+define suitable metrics that allow such a comparison. Third, we need
+to proved a framework that provides an  integrated set of data
+services that these metrics can be applied upon to conduct a
+comparative impact analysis. This is depicted in Figure
+\ref{F:objectives} on the lefthand side. 
+
+\subsection{Design}
+
+For XSEDE we have a set of specific design criteria that we are
+integrating into our architecture. Many of these design decisions
+will overlap with other resource providers. Certainly our design needs
+to be able to provide a comparative impact study for peers and also
+the funding agencies of the peers in conjunction with meaningful
+metrics. The metrics must be not only targeting the resource provider
+but also the community. Specifically for XSEDE interested parties in
+this analysis are not only the users, but also the Resource Allocation
+Committee (RAC) and the Leadership. the Bibliometric data services and
+the data mashup are largely hidden from these groups and the benefit
+form a number of preconfigured analysis that may be customized to the
+groups specific needs. To show generality of this approach we have
+taken one analysis and applied it not only to XSEDE as a resource
+provider, but also to National Center for Atmospheric Research
+(NCAR) \cite{www-ncar}. 
+
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
+  \caption{Architecture}\label{F:architecture} 
+\end{figure} 
+
+
+\subsection{Architecture}
+
+Architecture Figure \ref{F:architecture} 
+
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
+  \caption{Architecture}\label{F:architecture} 
+\end{figure} 
+
+
+
+\begin{enumerate}
+
+\item Is there a way to measure the impact that such facilities provide to scientific research?
+
+ \item Is there a correlation between the size of a given allocation and the scientific impact of an individual user, a given project, or a field of science?
+
+\item When evaluating a proposal request, what is the criteria to judge whether the proposal has the potential to lead to impactful research, and how does one obtain metrics to substantiate this?
+
+\end{enumerate} 
+
+To answer these questions, first we need a process to quantify the scientific outcome for the individual researchers. Secondly, we need to define and generate metrics to measure the scientific impact for individual researchers and higher level aggregated entities. Finally, we correlate the impact metrics to the consumed resources, to provide insight on how the computing facility benefits and impacts the science conducted utilizing its resources. In this paper, we present a framework that addresses these questions. It is important to point out that measuring scientific impact can be quite controversial and that the presented results do not necessarily represent an absolute measure of the impact of a scientific project, but rather the results we present represent one of many factors that together define the scientific impact.
+
+Furthermore, while we have restricted our analysis of scientific impact as it relates to XSEDE, the work presented here has general applicability to not only HPC resources, but to other resources including campus based HPC centers, beam lines, and other expensive equipment.
+
+In particular, we focus our effort to identify impact based on scientific publications as the base unit of the research productivity and obtain data, as well as derive various metrics based on publication data to measure the impact of individual users, projects, Field of Science (FOS), and XSEDE itself as a whole.
+
+In the following sections we briefly review related work (Section \ref{S:related}), then present our designed framework (Section \ref{S:design}) and implementation details (Section \ref{S:implementation}). Then, we discuss results and their impact (Section \ref{S:result}). Finally, we outline ongoing activities, indicate future plans (Section \ref{S:futurework}), and provide a summary (Section \ref{S:conclusion}).
+
+
+\section{old abstract}
 
 We present a framework that (a) integrates publication and citation
 data retrieval, (b) allows scientific impact metrics generation at
@@ -184,7 +308,7 @@ return on investment for XSEDE resources, or other institutional or
 campus resources for which an analysis of impact based on publications
 is important.
  
-\cite{las2014impact}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % SECTIONS 
@@ -195,22 +319,16 @@ is important.
 \section{Introduction}
 
 
-\begin{figure}[htb] 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
-  \caption{Objectives}\label{F:objectives} 
-\end{figure} 
- 
-\begin{figure}[htb] 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
-  \caption{Architecture}\label{F:architecture} 
-\end{figure} 
-
 
 \section{XSEDE}
 
-\subsection{TeraGrid/XSEDE\cite{www-xsede} publications peers comparison}
+XSEDE \cite{www-xsede} 
+
+ XDMoD \cite{Furlani:2013:UXF:2484762.2484763} 
+
+i10-index \cite{www-i10index}
+
+\subsection{TeraGrid/XSEDE publications peers comparison}
 
 \begin{figure*}[htb] 
   \centering 
@@ -606,8 +724,8 @@ in reviewing this paper.
 %\bibliographystyle{IEEEtran}
 \bibliographystyle{abbrvurl} 
 \bibliography{% 
-bib/tas.bib,%
-bib/vonlaszewski-new.bib} 
+bib/tas,%
+bib/vonlaszewski-new} 
 
 %\balancecolumns
 \end{document}
