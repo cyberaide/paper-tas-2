@@ -127,43 +127,85 @@ Robert L. DeLeon\\
 
 \begin{abstract}
 
+  We present a framework that compares the publication impact based on
+  a comprehensive peer analysis conducted by papers produced by
+  scientists using XSEDE and NCAR resources.
 
-  We present a framework to compare publication impact based on a
-  comprehensive peer analysis conducted by papers produced by
-  scientists using XSEDE and NCAR resources.  The analysis is based on
-  a ranking while comparing the number of citations in publications
-  that have been associated with XSEDE and NCAR in journals to other
-  publications in the same journal issues. As a result we find that
-  XSEDE and NCAR reported publications achieve a higher score versus
-  their peers.
+  The analysis is based on a percentile ranking of citations of the
+  papers while comparing them between to peer publication in the same
+  journal not using the specific resources.  This analysis is unique
+  in that it is a comprehensive study involving thousands of published
+  papers while associating them to a comparable peer group based on
+  the journals issues.
 
-  This analysis is unique in that it is a comprehensive study
-  involving thousands of published papers. While analyzing the number
-  of citations we can see that citations of paper that utilize XSEDE
-  and NCAR resources are positive.
+  While analyzing the number of citations we can see that citations of
+  paper that utilize XSEDE and NCAR resources are positive.  Hence we
+  find that XSEDE and NCAR reported publications achieve a higher
+  score versus their peers from the same journal issue not using these
+  resources.
 
-OLD:
-
-We present a framework that (a) integrates publication and citation data retrieval, (b) allows scientific impact metrics generation at different aggregation levels, and (c) provides correlation analysis of impact metrics based on publication and citation data with resource allocation for a computing facility. Furthermore, we use this framework to conduct a scientific impact metrics evaluation of XSEDE. We carry out an extensive statistical analysis correlating XSEDE allocation size to the impact metrics aggregated by project and field of science. This analysis not only helps to provide an indication of XSEDE's scientific impact, but also provides insight regarding maximizing the return on investment in terms of allocation by taking into account the field of science or project based impact metrics. The findings from this analysis can be utilized by the XSEDE resource allocation committee to help assess and identify projects with higher scientific impact. It can also help provide metrics regarding the return on investment for XSEDE resources, or other institutional or campus resources for which an analysis of impact based on publications is important.
- 
 \end{abstract}
+
 
 \vspace{-6pt}
 
 % A category with the (minimum) three required fields
 \category{H.4}{Information Systems Applications}{Miscellaneous}
+
 %A category including the fourth, optional field follows...
-\category{D.2.8}{Software Engineering}{Metrics}[complexity measures, performance measures]
 
-
+\category{D.2.8}{Software Engineering}{Metrics}[complexity measures,
+performance measures]
 
 \terms{Theory, Measurement}
 
-\keywords{Scientific impact, bibliometric, h-index, Technology Audit Service, XDMoD, XSEDE} 
+\keywords{Scientific impact, bibliometric, h-index, Technology Audit
+  Service, XDMoD, XSEDE}
+
+
+\section{Introduction}
+
+We present a framework that (a) integrates publication and citation
+data retrieval, (b) allows scientific impact metrics generation at
+different aggregation levels, and (c) provides correlation analysis of
+impact metrics based on publication and citation data with resource
+allocation for a computing facility. Furthermore, we use this
+framework to conduct a scientific impact metrics evaluation of XSEDE.
+We carry out an extensive statistical analysis correlating XSEDE
+allocation size to the impact metrics aggregated by project and field
+of science. This analysis not only helps to provide an indication of
+XSEDE's scientific impact, but also provides insight regarding
+maximizing the return on investment in terms of allocation by taking
+into account the field of science or project based impact metrics. The
+findings from this analysis can be utilized by the XSEDE resource
+allocation committee to help assess and identify projects with higher
+scientific impact. It can also help provide metrics regarding the
+return on investment for XSEDE resources, or other institutional or
+campus resources for which an analysis of impact based on publications
+is important.
+ 
+\cite{las2014impact}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % SECTIONS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+\section{Introduction}
+
+
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
+  \caption{Objectives}\label{F:objectives} 
+\end{figure} 
+ 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
+  \caption{Architecture}\label{F:architecture} 
+\end{figure} 
 
 
 \section{XSEDE}
@@ -182,11 +224,13 @@ We present a framework that (a) integrates publication and citation data retriev
   \caption{Kernel density of distributions for XSEDE publication percentile ranking versus peers}\label{F:xd_peers_density} 
 \end{figure}
 
-Figure \ref{F:xd_peers_density} shows the kernel density of the distributions 
-of XSEDE publications' percentile ranking and that of peers'. It shows XSEDE 
-publications tend to have higher percentile ranking. 
+Figure \ref{F:xd_peers_density} shows the kernel density of the
+distributions of XSEDE publications' percentile ranking and that of
+peers'. It shows XSEDE publications tend to have higher percentile
+ranking.
 
-Table \ref{T:groups_stats} listed the average and median rankings and citations received of the two groups to evaluate and compare.
+Table \ref{T:groups_stats} listed the average and median rankings and
+citations received of the two groups to evaluate and compare.
 
 \begin{table}[h]
 \caption{Basic statistics of XSEDE publications group and peers group}
@@ -203,7 +247,9 @@ peers & 168422	& 49	& 48	& 13	& 5 \\
 \end{small}
 \end{table}
 
-We can performe T-test to show the statistic significance. The results show that XSEDE group has statistically higher ranking as well as absolute citation than the peers group does.
+We can perform T-test to show the statistic significance. The results
+show that XSEDE group has statistically higher ranking as well as
+absolute citation than the peers group does.
 
 \begin{enumerate}
 \item T-test for ranking (Welch Two sample t-test)
@@ -219,16 +265,21 @@ We can performe T-test to show the statistic significance. The results show that
 \end{enumerate}
  
 
-\begin{figure*}[htb] 
+\begin{figure}[htb] 
   \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-bar-by-score.pdf} 
+    \includegraphics[width=1.0\columnwidth]{images-new/xsede-journal-score.pdf} 
   \caption{xsede journal bar by score}\label{F:xsede-score} 
-\end{figure*}
+ \end{figure}
 
 \subsection{Field of Science analysis}
 
 
-For the percentile ranking of TG/XD publications among the journal issues where each publication was published, we aggregate them based on Field of Science (FOS), according to the categories defined in XSEDE central database (XDCDB), and calculate the average and median percentile ranking for each field of science, as well as a \emph{performance score} that will be defined below in detail.
+For the percentile ranking of TG/XD publications among the journal
+issues where each publication was published, we aggregate them based
+on Field of Science (FOS), according to the categories defined in
+XSEDE central database (XDCDB), and calculate the average and median
+percentile ranking for each field of science, as well as a
+\emph{performance score} that will be defined below in detail.
 
 We include only those with at least five publications so the results
 are not statistically meaningless. To identify the FOS for each
@@ -236,14 +287,24 @@ publication, we followed this:
 
 \begin{enumerate}
 
-\item	Publications from past TG/XD quarterly reports may have had FOS information explicitly associated with them;
-\item	Find FOS information based on project data in XDCDB. It's
+\item Publications from past TG/XD quarterly reports may have had
+  FOS information explicitly associated with them;
+
+\item Find FOS information based on project data in XDCDB. It's
   possible that one project is associated with multiple FOS, in which
   case, we counted that publication into all involved FOS.
+
 \begin{enumerate}
-\item	Some publications from TG/XD quarterly reports had only project proposal number. We can map them to the project charge number and account id used internally within XSEDE central database;
-\item	For user uploaded publications data from XSEDE user portal, a project charge number would be associated with them.
+
+\item Some publications from TG/XD quarterly reports had only project
+  proposal number. We can map them to the project charge number and
+  account id used internally within XSEDE central database;
+
+\item For user uploaded publications data from XSEDE user portal, a
+  project charge number would be associated with them.
+
 \end{enumerate}
+
 \end{enumerate}
 
 The performance score is defined as:
@@ -251,21 +312,33 @@ The performance score is defined as:
 \[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
 
 In which, $P_{Q_i}$ is the percentage of pubs falling into the top i
-quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS.
+quarter. $P_{Q_i}$ gets the value in $[0,1]$ and
+$\sum_{i} {P_{Q_i}} = 1$ for one FOS.
 
-It's trivial to see that S has its value from $[-1, 1]$. A Positive value implies more publications appear on upper half in ranking and negative means more on lower half.
+It's trivial to see that S has its value from $[-1, 1]$. A Positive
+value implies more publications appear on upper half in ranking and
+negative means more on lower half.
 
-The results are shown in the following chart, sorted by the performance score in descending order:
+The results are shown in the following chart, sorted by the
+performance score in descending order:
 
 
 \begin{figure*}[htb] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/a.pdf} 
   \caption{xsede stacked 1}\label{F:xsede-stacked} 
+
+  \centering 
+    \includegraphics[width=1.0\textwidth]{images-new/b.pdf} 
+  \caption{xsede stacked 2}\label{F:xsede-stacked} 
 \end{figure*} 
 
 
-Note: The result was based on FOS data that were originally assigned/associated in the past reports or previously assigned project affiliation data. FOS in a higher level (as a parent FOS) might be showing here but the values might be changing in later analysis after aggregating more children FOS into that parent FOS.
+Note: The result was based on FOS data that were originally
+assigned/associated in the past reports or previously assigned project
+affiliation data. FOS in a higher level (as a parent FOS) might be
+showing here but the values might be changing in later analysis after
+aggregating more children FOS into that parent FOS.
 
 
 
@@ -343,11 +416,6 @@ We furthermore aggregate the results based on their parents FOS, and
 finally to the top level FOS category, as defined by NSF. The results
 (chart and raw data) are shown as below.
 
-\begin{figure*}[htb] 
-  \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/b.pdf} 
-  \caption{xsede stacked 2}\label{F:xsede-stacked} 
-\end{figure*} 
 
 
 \begin{table}[h]
@@ -412,21 +480,21 @@ Computer and Information Science and Engineering  &   50  &  46  & 0.01 \\
 
 \begin{figure}[htb] 
   \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/ncar-a.pdf} 
+    \includegraphics[width=0.75\columnwidth]{images-new/ncar-a.pdf} 
   \caption{Pie Chart ncar stacked a}\label{F:ncar-stacked-a} 
 \end{figure} 
 
-\begin{figure*}[htb] 
+\begin{figure}[htb] 
   \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/ncar-b.pdf} 
+    \includegraphics[width=1.0\columnwidth]{images-new/ncar-b.pdf} 
   \caption{ncar stacked b}\label{F:ncar-stacked-b} 
-\end{figure*} 
+\end{figure} 
 
-\begin{figure*}[htb] 
+\begin{figure}[htb] 
   \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/ncar-c.pdf} 
+    \includegraphics[width=1.0\columnwidth]{images-new/ncar-c.pdf} 
   \caption{ncar stacked c}\label{F:ncar-score}
-\end{figure*} 
+\end{figure} 
 
 
 NCAR publication analysis by comparing percentile ranking among peers
@@ -436,13 +504,37 @@ Original data:
 A text file with 880 publications curated by NCAR.
 
 Processing:
+
 \begin{enumerate}
-\item	Parsed the text file and pub publications into structured database -- title, doi.
-\item	Query ISI Web of Knowledge to get detailed information of the publications -- journal name, issue, citation data, etc. We were able to verify and obtain data for 813 publications.
-\item	Identify and obtain peers data based on journal issue information. In total 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than 5 publications appeared on them. This leads to 35 different journals that cover 653 identical publications. Out of the 35 journals, we had peers data for 12 of them (based on what we had for XSEDE peers comparison). For the other 23 journals, we obtained additionally 39k peer publication data.
-\item	For each NCAR publication, computing the percentile ranking among peers within the same journal issue (against ALL publication entries as obtained from ISI Web of Knowledge).
-\item	Group the percentile ranking scores based on each journal, and divide the scores into each ranking quarters (Q1: top 25\%; Q2: 25\%~50\%; and so on). Compute the percentile for those that fall into each ranking quarter.
-\item	Plot the results in a stacked column chart.
+
+\item Parsed the text file and pub publications into structured
+  database -- title, doi.
+
+\item Query ISI Web of Knowledge to get detailed information of the
+  publications -- journal name, issue, citation data, etc. We were
+  able to verify and obtain data for 813 publications.
+
+\item Identify and obtain peers data based on journal issue
+  information. In total 130 different publication venues have been
+  identified. To ensure the results are statistically meaningful, we
+  eliminated those with less than 5 publications appeared on them.
+  This leads to 35 different journals that cover 653 identical
+  publications. Out of the 35 journals, we had peers data for 12 of
+  them (based on what we had for XSEDE peers comparison). For the
+  other 23 journals, we obtained additionally 39k peer publication
+  data.
+
+\item For each NCAR publication, computing the percentile ranking
+  among peers within the same journal issue (against ALL publication
+  entries as obtained from ISI Web of Knowledge).
+
+\item Group the percentile ranking scores based on each journal, and
+  divide the scores into each ranking quarters (Q1: top 25\%; Q2:
+  25\%~50\%; and so on). Compute the percentile for those that fall
+  into each ranking quarter.
+
+\item Plot the results in a stacked column chart.
+
 \end{enumerate}
 
 Results:
@@ -450,10 +542,11 @@ Results:
 \item	Journals distribution showing top 10 journals based on \# of publications.
 \end{enumerate}
 
-The top 10 journals (totally 484 publications) accounted for about
-3 quarters of the 653 publications from the 35 journals with at least
+The top 10 journals (totally 484 publications) accounted for about 3
+quarters of the 653 publications from the 35 journals with at least
 five publications appeared on them; or 60\% of the 813 publications
-from the 130 journals we identified via ISI source (see Table~\ref{T:ncar-pub-count-venue}).
+from the 130 journals we identified via ISI source (see
+Table~\ref{T:ncar-pub-count-venue}).
 
 \begin{table}[h]
 \caption{Top ten journals with the most publicationsns of NCAR
@@ -479,27 +572,59 @@ Venue & Count \\
 \end{table}
 
 \begin{enumerate}
-\item	Stacked column chart showing percentage of percentile ranking that falls into each ranking quarter for each journal (Q1 stands for the top 1st quarter)
+
+\item Stacked column chart showing percentage of percentile ranking
+  that falls into each ranking quarter for each journal (Q1 stands for
+  the top 1st quarter)
+
 \end{enumerate}
 
-We also computed and compared the \emph{performance score} as defined earlier. The result is shown in Figure \ref{F:ncar-score}.
+We also computed and compared the \emph{performance score} as defined
+earlier. The result is shown in Figure \ref{F:ncar-score}.
 
+
+\section{Conclusion}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+% Acknowledgment 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\section{Acknowledgments}
+
+ 
+This work is part of the Technology Auditing Service (TAS) project
+sponsored by NSF under grant number OCI 1025159. Lessons learned from
+FutureGrid have significantly influenced this work. Gathering
+publications has first been pioneered by FutureGrid influencing the
+development in the XSEDE portal. We would like to thank Matt Hanlon
+and Maytal Dahan for their efforts to integrate this framework into
+the XSEDE portal. We would like to thank Barbara O'Leary for her help
+in reviewing this paper.
+ 
+%\bibliographystyle{IEEEtranS}
+%\bibliographystyle{IEEEtran}
+\bibliographystyle{abbrvurl} 
+\bibliography{% 
+bib/tas.bib,%
+bib/vonlaszewski-new.bib} 
+
+%\balancecolumns
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% END END 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \clearpage
 
 \section{OLD TEXT}
-
-\begin{figure}[htb] 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
-  \caption{Objectives}\label{F:objectives} 
-\end{figure} 
- 
-\begin{figure}[htb] 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
-  \caption{Architecture}\label{F:architecture} 
-\end{figure} 
 
 \begin{figure*}[htb] 
   \centering 
@@ -543,25 +668,6 @@ We also computed and compared the \emph{performance score} as defined earlier. T
   \caption{journal score}\label{F:jounarl-score} 
 \end{figure*} 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% Acknowledgment 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-\section{Acknowledgments}
-
- 
-This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI 1025159. Lessons learned from FutureGrid have significantly influenced this work. Gathering publications has first been pioneered by FutureGrid influencing the development in the XSEDE portal. We would like to thank Matt Hanlon and Maytal Dahan for their efforts to integrate this framework into the XSEDE portal. We would like to thank Barbara O'Leary for her help in reviewing this paper.
- 
-%\bibliographystyle{IEEEtranS}
-%\bibliographystyle{IEEEtran}
-\bibliographystyle{abbrvurl} 
-\bibliography{% 
-bib/tas.bib} 
-
-%\balancecolumns
-\end{document}
 
 
 
@@ -788,3 +894,8 @@ It is obvious that continuous work is crucial to conduct longitudinal tracking o
 
 
 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/fos.pdf} 
+  \caption{Objectives}\label{F:objectives} 
+\end{figure} 
