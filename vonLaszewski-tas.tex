@@ -211,6 +211,18 @@ the next section a peer analysis of NCAR data. We present important
 statistics about this metric for both XSEDE and NCAR. in its relevant
 sections. Finally we present our conclusions.
 
+\section{Related Work}
+
+Despite the fact that a number of related work has been conducted
+\cite{thomas1998institutional,
+  Bollen:2007:MUM:1255175.1255273,Bollen:2008:TUI:1378889.1378928,
+  bollen2009principal,bollen2011and} this work is unique as it provides a
+comprehensive analysis superior in data volume to other studies and is
+focussed on the analysis of XSEDE and NCAR data. More inforamtion
+about related work can be found in \cite{las14impact}. We are happy to
+engage in collaborate efforts to enhance this work or to integrate
+other related work by contacting us.
+
 \section{Bibliometric Data Analysis \\Framework for Resource
   \\Providers}
 
@@ -260,108 +272,76 @@ provider, but also to National Center for Atmospheric Research
 
 \subsection{Architecture}
 
-Architecture Figure \ref{F:architecture} 
+The requirements for XSEDE and our user community have resulted in a
+layered architecture as depicted in \ref{F:architecture}.  The
+framework is based on distributed set of services.  The
+service-oriented system consists of components for (a) publication and
+citation data retrieval (e.g., from NSF award database, Google
+Scholar, and ISI Web of Science), (b) parsing and processing while
+correlating data from various databases and services, such as the
+XSEDE central database (XDcDB), which stores all usage data for jobs
+run on XSEDE resources, and (c) the Partnerships Online Proposal
+System (POPS) database, which stores publication and grant funding
+information for PI's applying for XSEDE allocations.  The system also
+includes components for metrics generation and an analysis system for
+different aggregation levels (users, projects, organization, Field of
+Science), as well as a presentation layer using a lightweight portal
+in addition to exposing some data via RESTful API. \cite{las14impact}.
+The main layers include (a) {\em Interface Layer} -- containing easy
+to use interfaces for various community, including an API, RST, and a
+Web GUI interface; (b) {\em Service Layer} -- containing advanced
+services to bridge to a data base mashup via sophisticated services
+and queries to the underlaying database layer; (c) {\em Database
+  Mashup Service Layer} -- a sophisticated database mashup that
+contains the integration of data from a variety of data resources; and
+(d) the {\em Database Resources} that provide the underlaying
+information for our service.
+
+Due to this approach our framework is expandable as we are able to not
+only integrate resources relevant for XSEDE, but also other resource
+providers such as NCAR. However we need to customize these integration
+and allow relevant services to be exposed to the framework. In some
+cases. In some cases it could be as simple as replacing the database
+with minor adaption in the service layer.
 
 \begin{figure}[htb] 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
-  \caption{Architecture}\label{F:architecture} 
+  \caption{Architecture with the Interface, Service, Database Mashup,
+    and Database Resources Layers}\label{F:architecture} 
 \end{figure} 
 
+Our current framework for XSEDE include specialized services and
+curated focussing on XSEDE user specific publication data as well as,
+user, project, and Field of Science (FOS) views. The publication
+mashup component aggregates the publication data mined from the
+previous component, in addition to those from XDcDB, and from other
+available external services. It also retrieves citation data for each
+publication from external services. Another essential task of this
+component is to generate metrics for users, projects, and FOS in which
+the POPS database is involved to get proposal and project data. This
+data will be stored into the mashup database which can then be
+integrated into the XDMoD \cite{Furlani:2013:UXF:2484762.2484763}
+system at our partner site at University of Buffalo.
 
+To conduct the analysis the general workflow includes obtaining the
+publication data for each XSEDE user, and then retrieving the citation
+data for each publication. Hence, the data is originally collected per
+user and per publication basis. As part of processing the data we are
+aggregating it based on organization, XSEDE project/account, and FOS.
+By correlating the data (for example the Service Units (SU) awarded by
+XSEDE) our intention is to identify if the analysis may reveal
+patterns and trends of how XSEDE can impact the sciences and possibly
+helps to achieve a better measure of return on investment (ROI) for
+NSF. 
 
-\begin{enumerate}
+\section{Metric for Journal Publication-based Peer Comparison}
 
-\item Is there a way to measure the impact that such facilities
-  provide to scientific research?
-
-\item Is there a correlation between the size of a given allocation
-  and the scientific impact of an individual user, a given project, or
-  a field of science?
-
-\item When evaluating a proposal request, what is the criteria to
-  judge whether the proposal has the potential to lead to impactful
-  research, and how does one obtain metrics to substantiate this?
-
-\end{enumerate} 
-
-To answer these questions, first we need a process to quantify the
-scientific outcome for the individual researchers. Secondly, we need
-to define and generate metrics to measure the scientific impact for
-individual researchers and higher level aggregated entities. Finally,
-we correlate the impact metrics to the consumed resources, to provide
-insight on how the computing facility benefits and impacts the science
-conducted utilizing its resources. In this paper, we present a
-framework that addresses these questions. It is important to point out
-that measuring scientific impact can be quite controversial and that
-the presented results do not necessarily represent an absolute measure
-of the impact of a scientific project, but rather the results we
-present represent one of many factors that together define the
-scientific impact.
-
-Furthermore, while we have restricted our analysis of scientific
-impact as it relates to XSEDE, the work presented here has general
-applicability to not only HPC resources, but to other resources
-including campus based HPC centers, beam lines, and other expensive
-equipment.
-
-In particular, we focus our effort to identify impact based on
-scientific publications as the base unit of the research productivity
-and obtain data, as well as derive various metrics based on
-publication data to measure the impact of individual users, projects,
-Field of Science (FOS), and XSEDE itself as a whole.
-
-In the following sections we briefly review related work (Section
-\ref{S:related}), then present our designed framework (Section
-\ref{S:design}) and implementation details (Section
-\ref{S:implementation}). Then, we discuss results and their impact
-(Section \ref{S:result}). Finally, we outline ongoing activities,
-indicate future plans (Section \ref{S:futurework}), and provide a
-summary (Section \ref{S:conclusion}).
-
-
-\section{old abstract}
-
-We present a framework that (a) integrates publication and citation
-data retrieval, (b) allows scientific impact metrics generation at
-different aggregation levels, and (c) provides correlation analysis of
-impact metrics based on publication and citation data with resource
-allocation for a computing facility. Furthermore, we use this
-framework to conduct a scientific impact metrics evaluation of XSEDE.
-We carry out an extensive statistical analysis correlating XSEDE
-allocation size to the impact metrics aggregated by project and field
-of science. This analysis not only helps to provide an indication of
-XSEDE's scientific impact, but also provides insight regarding
-maximizing the return on investment in terms of allocation by taking
-into account the field of science or project based impact metrics. The
-findings from this analysis can be utilized by the XSEDE resource
-allocation committee to help assess and identify projects with higher
-scientific impact. It can also help provide metrics regarding the
-return on investment for XSEDE resources, or other institutional or
-campus resources for which an analysis of impact based on publications
-is important.
- 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-% SECTIONS 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-
-
-
-\section{Introduction}
-
-
-
-\section{XSEDE}
-
-XSEDE \cite{www-xsede} 
-
- XDMoD \cite{Furlani:2013:UXF:2484762.2484763} 
-
-i10-index \cite{www-i10index}
-
-\subsection{TeraGrid/XSEDE publications peers comparison}
+While we have focused in our previous work has focused more on the
+internal analysis of data within XSEDE in regards to FOS, h-index
+\cite{hirsch2005index} , g-index \cite{www-i10index} and i-index \cite{egghe2006theory}, we
+extend in this work the scope of peer comparison to external peers and
+hence significantly expand our original analysis.
 
 \begin{figure*}[htb] 
   \centering 
@@ -881,125 +861,18 @@ and obtain data, as well as derive various metrics based on
 publication data to measure the impact of individual users, projects,
 Field of Science (FOS), and XSEDE itself as a whole.
 
-In the following sections we briefly review related work (Section
-\ref{S:related}), then present our designed framework (Section
-\ref{S:design}) and implementation details (Section
-\ref{S:implementation}). Then, we discuss results and their impact
-(Section \ref{S:result}). Finally, we outline ongoing activities,
-indicate future plans (Section \ref{S:futurework}), and provide a
-summary (Section \ref{S:conclusion}).
-
-\section{Related Work} \label{S:related}
-
-Our choice of using publication as the basic unit to measure the
-scientific impact is supported by the fact that bibliometrics based
-criteria is one of the de-facto standards to measure the impact of
-research. For example, publication derived metrics are broadly used in
-faculty recruit/promotion, and institutional rankings
-\cite{thomas1998institutional}. While usage based metrics are proposed
-by some
-\cite{Bollen:2007:MUM:1255175.1255273,Bollen:2008:TUI:1378889.1378928,
-  bollen2009principal}, citation based metrics are a widely accepted
-measure. For instance, nanoHub uses publication and citation derived
-metrics to measure the impact of their project \cite{www-nanohubcite}.
-
-In addition to the intuitive measures like number of publications and
-number of citations, h-index \cite{hirsch2005index} and g-index
-\cite{egghe2006theory} are two other popular metrics. The publication
-count is often related to a measure of the productivity, while
-citation counts are often related to the quality, or impact of the
-work published. As h-index and g-index calculate the metric by
-combining this data, they measure both the productivity and the
-quality, thus providing a general measure for impact.
-
-There are existing tools to measure the metrics for individual users,
-e.g. Scholarometer \cite{kaur2012scholarometer} and Publish or Perish
-\cite{www-pop}. These could be potentially leveraged to analyze a
-relatively small group of users, e.g., the work \cite{bollen2011and}
-showing TeraGrid's impact based on limited data from one resource
-allocation meeting consisting of only 112 selected PIs. However,
-neither of the tools provides a scalable solution to the large
-community we are concerned with here, namely the over 20,000 users who
-have utilized TeraGrid/XSEDE resources. While more formal publication
-based metrics, either based on citation or usage, are still the most
-widely employed criteria,
-
-Other non publication based metrics have been proposed by altmetrics
-\cite{www-altmetrics} while also considering measures for datasets and
-code; as well as mentioning of a snippet of work via social
-networking. We acknowledge these efforts will be useful as they
-correlate other usage, however at this time we still lack standards
-and a well-established way to objectively derive scientific impact
-from the multitude of data sources. Furthermore, often we do not have
-reliable data available.
-
 
 
 \section{System Design} 
 \label{S:design} 
 
-We have designed a software framework to support measuring scientific
-impact via a publication and citation based approach. The framework is
-based on distributed set of services. The service-oriented system
-consists of components for (a) publication and citation data retrieval
-(e.g., from NSF award database, Google Scholar, and ISI Web of
-Science), (b) parsing and processing while correlating data from
-various databases and services, such as the XSEDE central database
-(XDcDB), which stores all usage data for jobs run on XSEDE resources,
-and (c) the Partnerships Online Proposal System (POPS) database, which
-stores publication and grant funding information for PI's applying for
-XSEDE allocations. The system also includes components for metrics
-generation and an analysis system for different aggregation levels
-(users, projects, organization, Field of Science), as well as a
-presentation layer using a lightweight portal in addition to exposing
-some data via RESTful API.
-
-Fig \ref{F:tas-arch} shows the layered system architecture, with an
-emphasis on the relationships between related components especially
-those integrating with databases. On the core \emph{\textbf{App}}
-layer we have the database mining and publication mashup components.
-The database mining component generates XSEDE user specific
-publication data as well as, user, project, and Field of Science (FOS)
-views. The publication mashup component aggregates the publication
-data mined from the previous component, in addition to those from
-XDcDB, and from other available external services. It also retrieves
-citation data for each publication from external services. Another
-essential task of this component is to generate metrics for users,
-projects, and FOS in which the POPS database is involved to get
-proposal and project data. This data will be stored into the mashup
-database which can then be integrated into the XDMoD
-\cite{Furlani:2013:UXF:2484762.2484763} system at our partner site at
-University of Buffalo. We also expose some data and analysis results
-via RESTful API and a portal as denoted on the
-\emph{\textbf{Service/GUI}} layer. The \emph{\textbf{Data}} layer
-illustrates the databases involved. The \emph{\textbf{External
-    Resource/Services}} layer lists the third party resource and
-services that we are currently using or have experimented or plan to
-investigate.
-
-\begin{figure}[htb] 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images/tas-arch.pdf} 
-  \caption{The Architecture of the Framework}\label{F:tas-arch} 
-\end{figure} 
 
 
-To conduct the analysis the general workflow includes obtaining the
-publication data for each XSEDE user, and then retrieving the citation
-data for each publication. Hence, the data is originally collected per
-user and per publication basis. As part of processing the data we are
-aggregating it based on organization, XSEDE project/account, and FOS.
-By correlating the data (for example the Service Units (SU) awarded by
-XSEDE) our intention is to identify if the analysis may reveal
-patterns and trends of how XSEDE can impact the sciences and possibly
-helps to achieve a better measure of return on investment (ROI) for
-NSF. While we are using the system to analyze the scientific impact of
-XSEDE, the framework itself is flexible enough so that it could be
-easily adapted to other similar systems for impact measure and
-analyses. \section{Implementation} \label{S:implementation} We have
-implemented the system following best practices and leveraging popular
-tools and frameworks. The core system is developed in Python and
-various libraries are utilized to help interact with various
+\section{Implementation} \label{S:implementation} 
+
+We have implemented the system following best practices and leveraging
+popular tools and frameworks. The core system is developed in Python
+and various libraries are utilized to help interact with various
 databases, developing service and web frameworks, and so on. The
 portal/web tier follows the Ajax approach which provides better
 experience to users while viewing the presented data and chart.
