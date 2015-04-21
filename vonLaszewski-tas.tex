@@ -26,6 +26,21 @@
  
 \newcommand{\FILE}[1]{\todo[color=green!40]{#1}} 
  
+
+%
+% more floats on one page
+%
+\renewcommand{\topfraction}{.85}
+\renewcommand{\bottomfraction}{.7}
+\renewcommand{\textfraction}{.15}
+\renewcommand{\floatpagefraction}{.66}
+\renewcommand{\dbltopfraction}{.66}
+\renewcommand{\dblfloatpagefraction}{.66}
+\setcounter{topnumber}{9}
+\setcounter{bottomnumber}{9}
+\setcounter{totalnumber}{20}
+\setcounter{dbltopnumber}{9}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % HYPERSETUP 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -250,14 +265,23 @@ We present our results in a number of graphs and tables. However we provide firs
  
 
 
-\begin{figure}[htb]
+\begin{figure}[htb!]
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/xd_peers_density.pdf} 
   \caption{Kernel density of distributions for XSEDE publication percentile ranking versus peers.}\label{F:xd_peers_density} 
-\end{figure}
+
+\includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
+  \caption{The socre of our peer comparision metric for XSEDE publications by journal.}\label{F:xsede-score} 
+    \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
+  \caption{Peers Comparison based on the top most Field of Science category as defined by NSF.}\label{F:xsede-top-c} 
+
+\hfill
+
+\end{figure} 
 
 
-\begin{table}[h]
+
+\begin{table}[h!]
 \caption{Basic statistics of XSEDE publications group and peers group}
 \label{T:groups_stats}
 \centering
@@ -273,64 +297,45 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 \end{table}
 
 
-\begin{figure*}[h!] 
+\begin{figure*}[htb!] 
   \centering 
-    \includegraphics[width=.9\textwidth]{images-new/xsede-journal-stacked.pdf} 
+    \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-stacked.pdf} 
   \caption{Percentile ranging by FOS in a stacked barchart of XSEDE publications.}\label{F:xsede-stacked} 
 \end{figure*}
 
+\bigskip
 
-\begin{figure*}[h!] 
+\begin{figure*}[htb!] 
   \centering 
     \includegraphics[width=.9\textwidth]{images-new/a.pdf} 
-  \caption{Peers comparison based on Field of Science of XSEDE publications.}\label{F:xsede-fos-a} 
+  \caption{Peer comparison based on Field of Science of XSEDE publications.}\label{F:xsede-fos-a} 
+
 
   \centering 
     \includegraphics[width=.9\textwidth]{images-new/b.pdf} 
   \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:xsede-stacked-b} 
+
+
 \end{figure*} 
 
 
-\begin{figure}[h!] 
-  \centering 
-    \includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
-  \caption{The socre of our peer comparision metric for XSEDE publications by journal.}\label{F:xsede-score} 
- \end{figure}
 
 
 
-Figure \ref{F:xsede-stacked} 
+The results are depicted in Figuree \ref{F:xsede-stacked}, \ref{F:xsede-fos-a}, \ref{F:xsede-stacked-b}, \ref{F:xsede-score}, and \ref{F:xsede-top-c}. 
 
-Figure \ref{F:xsede-score} 
+NSF and XSEDE define a hierarchy of FOS. In \ref{F:xsede-top-c} we show the top level FOS as defined by NSF. When we look axpand the FOS to the next level in the hierarchy we find the results as depicted in \ref{F:xsede-stacked-b}. The next level is shown in \ref{F:xsede-fos-a}. In each of these Figures shows the list of FOS in decreasing order by the performance score $S$. 
 
-Figure \ref{F:xsede-fos-a} 
+From \ref{F:xsede-fos-a} we can identify that for most Field of Science the TeraGrid/XSEDE publications performed better compared to their peers. The  average and median score higher than 50 and the sore is  positive performance. When looking at individual results, we see that astronomy and physics benefit most from using TeraGrid/XSEDE. When looking at the fields that perform worst, we find fields such as Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems. Such fields are typically not dominated by simulation science, and less computational resources. Other fields such as Training include also many other areas of training outside of supercomputing usage. We even find field such as Computer and Computation Research to be less impacted. We certainly have to acknowledge in this case that many theoretical papers and papers not using super computers are published. 
 
-Figure \ref{F:xsede-stacked-b} 
-
-
-Figure \ref{F:xsede-fos-a} shows the list of FOS in decreasing order by the performance score $S$. It shows that for most Field of Science the TeraGrid/XSEDE publications performed better compared to their peers. The  average and median score higher than 50 and the sore is  positive performance. When looking at individual results, we see that astronomy and physics benefit most from using TeraGrid/XSEDE. When looking at the fields that perform worst, we find fields such as Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems. Such fields are typically not dominated by simulation science, and less computational resources. Other fields such as Training include also many other areas of training outside of supercomputing usage. We even find field such as Computer and Computation Research to be less impacted. We certainly have to acknowledge in this case that many theoretical papers and papers not using super computers are published. 
-
-In Figure \ref{F:xsede-stacked-b} we group several of the FOS into group disciplines as identified by NSF and XSEDE, while in \ref{F:xsede-top-c} we show the top level of the disciplines as defined by NSF.
-We furthermore aggregate the results based on their parents 
-
-
-
-
-\begin{figure}[htb] 
-  \centering  
-    \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
-  \caption{Peers Comparison based on the top most Field of Science category as defined by NSF.}\label{F:xsede-top-c} 
-\end{figure} 
-
-
-
+To show the percentile distribution in more detail for each journal we present in Figure \ref{F:xsede-stacked} a stacked barchart. Also here we see as expected from our previous results that for most of the journals we see a positive impact in the percentile citation count. This is made obvious by looking at Figure \ref{F:xsede-score}. Here we also have included the average of the top 66 journals in which we found 10 or more XSEDE publications and find that the number is positive with a value of 0.284. Thus we can conclude that papers that use XSEDE resources based on self identification in reports and bibliographic upload to the XSEDE portal is beneficial while being more cited on average than their peers from the same journal.
 
 \section{NCAR}
 
 \begin{figure}[h!] 
   \centering 
     \includegraphics[width=0.75\columnwidth]{images-new/ncar-a.pdf} 
-  \caption{Distribution of the top most journals by publication count.}\label{F:ncar-stacked-a} 
+  \caption{Distribution of the top most journals by publication count.}\label{F:ncar-distribution} 
 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/ncar-b.pdf} 
@@ -341,37 +346,28 @@ We furthermore aggregate the results based on their parents
   \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:ncar-score}
 \end{figure} 
 
+We have replicated the analysis with data we have obtained from NCAR. The data we obtained from NCAR was smaller than the one we obtained from XSEDE. Thus instead of looking at all journals that have at least ten publications, we have reduced the value to five. This will give a large enough journal number to conduct our analysis in this case.
+To conduct the analusis we have taken the following steps.
 
-NCAR publication analysis by comparing percentile ranking among peers
-
-
-Original data:
 A text file with 880 publications curated by NCAR.
 
 Processing:
 
 \begin{enumerate}
 
-\item Parsed the text file and pub publications into structured database -- title, doi.
+\item We parsed the text file containing 880 publications into structured database while identifying titles, and doi's.
 
-\item Query ISI Web of Knowledge to get detailed information of the publications -- journal name, issue, citation data, etc. We were able to verify and obtain data for 813 publications.
+\item With our framework we queried ISI Web of Knowledge to get detailed information of the publications -- journal name, issue, citation data and other identifying information. We were able to verify and obtain data for 813 publications.
 
-\item Identify and obtain peers data based on journal issue information. In total 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than 5 publications appeared on them.  This leads to 35 different journals that cover 653 identical publications. Out of the 35 journals, we had peers data for 12 of them (based on what we had for XSEDE peers comparison). For the other 23 journals, we obtained additionally 39k peer publication data.
+\item Through our framework we identified and obtained  peer data based on journal issue information. In total 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than 5 publications appeared on them.  This leads to 35 different journals that cover 653 identical publications. Out of the 35 journals, we had peers data for 12 of them (based on what we had for XSEDE peers comparison). For the other 23 journals, we obtained additionally 39k peer publication data.
 
-\item For each NCAR publication, computing the percentile ranking among peers within the same journal issue (against ALL publication entries as obtained from ISI Web of Knowledge).
+\item For each NCAR publication we computed the percentile ranking among peers within the same journal issue against all publication entries as obtained from ISI Web of Knowledge.
 
-\item Group the percentile ranking scores based on each journal, and divide the scores into each ranking quarters (Q1: top 25\%; Q2: 25\%~50\%; and so on). Compute the percentile for those that fall into each ranking quarter.
-
-\item Plot the results in a stacked column chart.
+\item We grouped the percentile ranking scores based on each journal, and divided the scores into each ranking quarters ($Q_1$: top 25\%; top $Q_2$: 25\%~50\%; bottom $Q_3$: 50\%-75\%, bottom $Q_4$: 75\%-100\%). Compute the percentile for those that fall into each ranking quarter.
 
 \end{enumerate}
 
-Results:
-\begin{enumerate}
-\item	Journals distribution showing top 10 journals based on \# of publications.
-\end{enumerate}
-
-The top 10 journals (totally 484 publications) accounted for about 3 quarters of the 653 publications from the 35 journals with at least five publications appeared on them; or 60\% of the 813 publications from the 130 journals we identified via ISI source (see Table~\ref{T:ncar-pub-count-venue}).
+We depict the result in a stacked column chart as shown in Figure \ref{F:xsede-stacked}.  In Figure \ref{F:ncar-distribution} we show the distribution of the publications in the top 10 journals sorted by the number of publications. The top 10 journals (totaling 484 publications). They account for about 3 quarters of the 653 publications from the 35 journals with at least five publications appeared on them; or 60\% of the 813 publications from the 130 journals we identified via ISI source (see Table~\ref{T:ncar-pub-count-venue}).
 
 \begin{table}[h]
 \caption{Top ten journals with the most publicationsns of NCAR
@@ -396,16 +392,18 @@ Venue & Count \\
 }
 \end{table}
 
-\begin{enumerate}
-
-\item Stacked column chart showing percentage of percentile ranking that falls into each ranking quarter for each journal (Q1 stands for the top 1st quarter)
-
-\end{enumerate}
-
-We also computed and compared the \emph{performance score} as defined earlier. The result is shown in Figure \ref{F:ncar-score}.
-
+We also computed and compared the \emph{performance score} as defined earlier. The result is shown in Figure \ref{F:ncar-score}. Here we see that the average over all 35 entries is a positive value with about 0.35. 
 
 \section{Conclusion}
+
+We make the observation that the score is slightly higher than that of that of XSEDE. However we need to take into account that XSEDE publications have a wider range of FOS than NCAR has that focusses on a much narrower FOS. Furthermore as we can see from XSEDE research in the atmospheric sciences while using XSEDE resources result in highest score values. Thus we can certainly expect that the value is higher for NCAR as they do not include the other disciplines that have lower values.
+
+However, the most important conclusion we make for our metric is that for both XSEDE and NCAR identified publications the impact measured by a percentile score is positive and higher than their peers that have not used such resources. 
+
+We will further expand upon our metric and can define such values also for other groups defined in XSEDE, or other resource providers. The important information we need to accomplish this is a reliable source that identifies publications that can be associated with the resource. While exploring not only XSEDE, but also NCAR data we have in principle shown that our approach is applicable to other resource providers.
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
@@ -416,27 +414,8 @@ We also computed and compared the \emph{performance score} as defined earlier. T
 
  
 This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI 1025159. Lessons learned from FutureGrid have significantly influenced this work. Gathering publications has first been pioneered by FutureGrid influencing the development in the XSEDE portal. We would like to thank Matt Hanlon and Maytal Dahan for their efforts to integrate this framework into the XSEDE portal. We would like to thank Barbara O'Leary for her help in reviewing this paper.
- 
-%\bibliographystyle{IEEEtranS}
-%\bibliographystyle{IEEEtran}
-\bibliographystyle{abbrvurl} 
-\bibliography{% 
-bib/tas,%
-bib/vonlaszewski-new} 
 
-\balancecolumns
-
-\clearpage
-
-\appendix
-
-\begin{comment}
-The table with the detailed information is shown in Table
-\ref{T:xsede-raw-1}
-\end{comment}
-
-
-\begin{table}[htb]
+\begin{table}[!htb]
 \caption{The top level Field of Sciences in XSEDE as defined by NSF}
 \label{T:xsede-all-fos}
 \centering
@@ -548,7 +527,15 @@ Experimental and Theoretical Geochemistry &   5 &   34 & -0.50 \\
 }
 \end{table}
 
-\clearpage
+ 
+%\bibliographystyle{IEEEtranS}
+%\bibliographystyle{IEEEtran}
+\bibliographystyle{abbrvurl} 
+\bibliography{% 
+bib/tas,%
+bib/vonlaszewski-new} 
+
+
 
 \end{document}
 
