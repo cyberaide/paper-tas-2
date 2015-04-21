@@ -9,6 +9,7 @@
 % LATEX DEFINITIONS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{float}
 \usepackage{comment}
 \usepackage{hyperref} 
 \usepackage{array} 
@@ -177,6 +178,12 @@ For XSEDE we have identified specific design criteria that we are integrating in
     \label{F:objectives}
 \end{figure} 
 
+\begin{figure}[htb] 
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
+  \caption{Architecture with the Interface, Service, Database Mashup,
+    and Database Resources Layers}\label{F:architecture} 
+\end{figure} 
 
 
 \subsection{Architecture}
@@ -185,12 +192,6 @@ The requirements for XSEDE and our user community have resulted in a layered arc
 
 Due to this approach our framework is expandable as we are able to not only integrate resources relevant for XSEDE, but also other resource providers such as NCAR. However we need to customize this integration and allow relevant services to be exposed to the framework. In some cases it could be as simple as replacing the database with minor adaption in the service layer.
 
-\begin{figure}[htb] 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/architecture.pdf} 
-  \caption{Architecture with the Interface, Service, Database Mashup,
-    and Database Resources Layers}\label{F:architecture} 
-\end{figure} 
 
 Our current framework for XSEDE include specialized services and curated focusing on XSEDE user specific publication data as well as, user, project, and Field of Science (FOS) views. The publication mashup component aggregates the publication data mined from the previous component, in addition to those from XDcDB, and from other available external services. It also retrieves citation data for each publication from external services. Another essential task of this framework is to generate metrics for users, projects, and FOS in which the POPS database is involved to get proposal and project data. This data will be stored into the mashup database which can then be integrated into the XDMoD \cite{Furlani:2013:UXF:2484762.2484763} system at our partner site at University of Buffalo.
 
@@ -210,7 +211,7 @@ In which, $P_{Q_i}$ is the percentage of pubs falling into the top i quarter. $P
 
 It is trivial to see that $S$ has its value from $[-1, 1]$. A Positive value implies more publications appear on upper half in ranking and negative means more on lower half.
 
-To apply the percentile ranking to the field of science of TG/XD publications among the journal issues where each publication was published, we aggregate them based on Field of Science (FOS), according to the categories defined in XSEDE central database (XDcDB), and calculate the average and median percentile ranking for each field of science, as well as the resulting  \emph{performance score}. We include only those with at least ten\footnote{Is it for NCAR only 5? Would than not impact the performance score. Should we use the term S-5, S-10} publications so the results are not statistically meaningless. 
+To apply the percentile ranking to the field of science of TG/XD publications among the journal issues where each publication was published, we aggregate them based on Field of Science (FOS), according to the categories defined in XSEDE central database (XDcDB), and calculate the average and median percentile ranking for each field of science, as well as the resulting  \emph{performance score}. We include only those with at least ten\footnote{For NCAR data we have chosen a value of five due to the smaller number of overall publications} publications so the results are not statistically meaningless. 
 
 
 To identify the FOS for each publication, we followed this process:
@@ -232,47 +233,7 @@ To identify the FOS for each publication, we followed this process:
 \end{enumerate}
 
 Through this data mashup we obtained enough data to conduct our analysis.
-We present our results in a number of graphs and tables. However we provide first some data related to the sample.
-
-\begin{figure}[htb]
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/xd_peers_density.pdf} 
-  \caption{Kernel density of distributions for XSEDE publication percentile ranking versus peers.}\label{F:xd_peers_density} 
-\end{figure}
-
-\begin{figure*}[htb] 
-  \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-stacked.pdf} 
-  \caption{Percentile ranging by FOS in a stacked barchart.}\label{F:xsede-stacked} 
-\end{figure*}
-
-
-Figure \ref{F:xd_peers_density} shows the kernel density of the
-distributions of XSEDE publications' percentile ranking and that of
-peers'. {\em It shows XSEDE publications tend to have higher percentile
-ranking.}
-
-Table \ref{T:groups_stats} listed the average and median rankings and
-citations received of the two groups to evaluate and compare.
-
-\begin{table}[h]
-\caption{Basic statistics of XSEDE publications group and peers group}
-\label{T:groups_stats}
-\centering
-\begin{small}
-\begin{tabular}{lrrrrrr}
- &  Number of & Average & Median & Average & Median \\
- & Publications & Rank & Rank & Citations & Citations \\
-\hline
-XD & 2349	& 61	& 65	& 26	& 11 \\
-Peers & 168422	& 49	& 48	& 13	& 5 \\
-\end{tabular}
-\end{small}
-\end{table}
-
-We can perform a T-test to show the statistic significance. The results
-show that XSEDE group has statistically higher ranking as well as
-absolute citation than the peers group does.
+We present our results in a number of graphs and tables. However we provide first some data related to identify the sample. Figure \ref{F:xd_peers_density} shows the kernel density of the distributions of XSEDE publications' percentile ranking and that of peers'. {\em It shows XSEDE publications tend to have higher percentile ranking.} Table \ref{T:groups_stats} listed the average and median rankings and citations received of the two groups to evaluate and compare. We can perform a T-test to show the statistic significance. The results show that XSEDE group has statistically higher ranking as well as absolute citation than the peers group does.
 
 \begin{enumerate}
 \item T-test for ranking (Welch Two sample t-test)
@@ -288,180 +249,96 @@ absolute citation than the peers group does.
 \end{enumerate}
  
 
-\begin{figure}[htb] 
+
+\begin{figure}[htb]
   \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/xsede-journal-score.pdf} 
-  \caption{xsede journal bar by score}\label{F:xsede-score} 
- \end{figure}
-
-The results are shown in the following chart, sorted by the performance score in descending order:
+    \includegraphics[width=1.0\columnwidth]{images-new/xd_peers_density.pdf} 
+  \caption{Kernel density of distributions for XSEDE publication percentile ranking versus peers.}\label{F:xd_peers_density} 
+\end{figure}
 
 
-\begin{figure*}[htb] 
+\begin{table}[h]
+\caption{Basic statistics of XSEDE publications group and peers group}
+\label{T:groups_stats}
+\centering
+\begin{small}
+\begin{tabular}{lrrrrrr}
+ & Number of & \multicolumn{2}{ c }{Rank} & \multicolumn{2}{ c }{Citations}  \\
+ &  Publications & Average & Median & Average & Median \\
+\hline
+  XD     & 2349	        & 61	& 65	& 26	& 11 \\
+Peers & 168422	& 49	& 48	& 13	& 5 \\
+\end{tabular}
+\end{small}
+\end{table}
+
+
+\begin{figure*}[h!] 
   \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/a.pdf} 
-  \caption{xsede stacked 1}\label{F:xsede-stacked} 
+    \includegraphics[width=.9\textwidth]{images-new/xsede-journal-stacked.pdf} 
+  \caption{Percentile ranging by FOS in a stacked barchart of XSEDE publications.}\label{F:xsede-stacked} 
+\end{figure*}
+
+
+\begin{figure*}[h!] 
+  \centering 
+    \includegraphics[width=.9\textwidth]{images-new/a.pdf} 
+  \caption{Peers comparison based on Field of Science of XSEDE publications.}\label{F:xsede-fos-a} 
 
   \centering 
-    \includegraphics[width=1.0\textwidth]{images-new/b.pdf} 
-  \caption{xsede stacked 2}\label{F:xsede-stacked} 
+    \includegraphics[width=.9\textwidth]{images-new/b.pdf} 
+  \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:xsede-stacked-b} 
 \end{figure*} 
 
 
-Note: The result was based on FOS data that were originally assigned/associated in the past reports or previously assigned project affiliation data. FOS in a higher level (as a parent FOS) might be showing here but the values might be changing in later analysis after aggregating more children FOS into that parent FOS.
+\begin{figure}[h!] 
+  \centering 
+    \includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
+  \caption{The socre of our peer comparision metric for XSEDE publications by journal.}\label{F:xsede-score} 
+ \end{figure}
 
 
 
-\newcommand{\tablefont}{tiny}
+Figure \ref{F:xsede-stacked} 
 
-The table with the detailed information is shown in Table
-\ref{T:xsede-raw-1}
+Figure \ref{F:xsede-score} 
 
-\begin{comment}
-\begin{table}[h]
-\caption{Overview of the number of publications, average percentile
-  ranking and performance score for XSEDE publication data based on
-  Fiedl of science.}
-\label{T:xsede-raw-1}
-\centering
-{\small
-\begin{tabular}{p{0.6\columnwidth}rrr}
-% \begin{tabular}{lrrr}
+Figure \ref{F:xsede-fos-a} 
+
+Figure \ref{F:xsede-stacked-b} 
 
 
-FOS   & \rot{\shortstack[1]{ Number\\ of Pubs}} &  \rot{\shortstack[1]{average\\ ptrank}}   &    \rot{Score} \\
-\hline
-Galactic Astronomy &  14 & 81 &  0.86 \\
-Extragalactic Astronomy and Cosmology &  57 &  74 &  0.68 \\
-Gravitational Physics &  104 &    74 &  0.60 \\
-Nuclear Physics & 5 &   69 &  0.60 \\
-Ocean Sciences  & 5 &   76 &  0.60 \\
-Astronomical Sciences &  187 &    72 &  0.57 \\
-Integrative Biology and Neuroscience &   7 &   77 &  0.57 \\
-Electrical and Communication Systems &   54 &  72 &  0.55 \\
-Planetary Astronomy &    10 &  69 &  0.55 \\
-Stellar Astronomy and Astrophysics &  31 &  72 &  0.53 \\
-Theoretical Physics &    49 &  70 &  0.51 \\
-Physical Oceanography &  5 &   65 &  0.50 \\
-Earth Sciences  & 19 &  64 &  0.47 \\
-Physics & 147 &    67 &  0.45 \\
-Atomic, Molecular, and Optical Physics  & 55 &  68 &  0.45 \\
-Systematic and Population Biology &   37 &  66 &  0.41 \\
-Magnetospheric Physics  & 11 &  65 &  0.41 \\
-Solar Terrestrial Research &  10 &  66 &  0.40 \\
-Elementary Particle Physics &    27 &  66 &  0.39 \\
-Mechanics and Materials & 14 &  66 &  0.39 \\
-Solid State Chemistry and Polymers &  8 &   65 &  0.38 \\
-Atmospheric Sciences &   44 &  63 &  0.35 \\
-Biological and Critical Systems & 6 &   60 &  0.33 \\
-Molecular Biosciences &  494 &    63 &  0.32 \\
-Geophysics &  8 &   61 &  0.31 \\
-Computational Mathematics &   9 &   60 &  0.28 \\
-Biophysics &  323 &    60 &  0.25 \\
-Physical Chemistry &  168 &    60 &  0.25 \\
-Chemistry &   259 &    58 &  0.22 \\
-Fluid, Particulate, and Hydraulic Systems &   51 &  58 & 0.18 \\
-Materials Research &  305 &    55 &  0.17 \\
-Condensed Matter Physics &    61 &  55 &  0.17 \\
-Biochemistry and Molecular Structure and Function &   141 &    53 &  0.08 \\
-Organic and Macromolecular Chemistry &   44 &  51 &  0.07 \\
-Analytical and Surface Chemistry &    7 &   54 &  0.07 \\
-Metals, Ceramics, and Electronic Materials &  11 &  48 & 0.05 \\
-Cross-Disciplinary Activities &  26 &  53 &  0.04 \\
-Chemical, Thermal Systems &   38 &  51 &  0.03 \\
-Chemical and Reaction Processes & 31 &  54 &  0.03 \\
-Interfacial, Transport, and Separations Processes &   17 &  48 &  0.03 \\
-Advanced Scientific Computing &  18 &  48 &  0.00 \\
-Computer and Computation Research &   14 &  49 &  -0.04 \\
-Mechanical and Structural Systems &   14 &  44 &  -0.18 \\
-Geometric Analysis &  5 &   44 &  -0.40 \\
-Training &    5 &   34 &  -0.40 \\
-Experimental and Theoretical Geochemistry &   5 &   34 & -0.50 \\
-\end{tabular}
-}
-\end{table}
-\end{comment}
+Figure \ref{F:xsede-fos-a} shows the list of FOS in decreasing order by the performance score $S$. It shows that for most Field of Science the TeraGrid/XSEDE publications performed better compared to their peers. The  average and median score higher than 50 and the sore is  positive performance. When looking at individual results, we see that astronomy and physics benefit most from using TeraGrid/XSEDE. When looking at the fields that perform worst, we find fields such as Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems. Such fields are typically not dominated by simulation science, and less computational resources. Other fields such as Training include also many other areas of training outside of supercomputing usage. We even find field such as Computer and Computation Research to be less impacted. We certainly have to acknowledge in this case that many theoretical papers and papers not using super computers are published. 
 
-We furthermore aggregate the results based on their parents FOS, and finally to the top level FOS category, as defined by NSF. The results (chart and raw data) are shown as below.
+In Figure \ref{F:xsede-stacked-b} we group several of the FOS into group disciplines as identified by NSF and XSEDE, while in \ref{F:xsede-top-c} we show the top level of the disciplines as defined by NSF.
+We furthermore aggregate the results based on their parents 
 
 
 
-\begin{table}[h]
-\caption{Percentile ranking and score of XSEDE publicatiopn data
-  grouped by parent field of science.}
-\label{T:xsede-average-median-percentil-rancing-parent}
-\centering
-{\small
-\begin{tabular}{p{0.5\columnwidth}rrr}
-% \begin{tabular}{lrrr}
-FOS   & \rot{\shortstack[1]{Number\\ of Pubs}} &  \rot{\shortstack[1]{average\\ ptrank}}   &    \rot{Score} \\
-\hline
-Astronomical Sciences & 74 & 81 & 0.65 \\
-Physics & 71 & 79 & 0.53 \\
-Ocean Sciences & 65 & 58 & 0.5 \\
-Environmental Biology & 66 & 75 & 0.41 \\
-Geosciences & 64 & 70 & 0.4 \\
-Mechanical and Structural Systems &  66 & 71 & 0.39 \\
-Biological Sciences & 63 & 68 & 0.33 \\
-Mathematical and Physical Sciences & 61 & 66 & 0.31 \\
-Atmospheric Sciences &  61 & 65 & 0.29 \\
-Engineering & 61 & 66 & 0.27 \\
-Chemistry &  58 & 60 & 0.21 \\
-Molecular Biosciences & 58 & 60 & 0.2 \\
-Materials Research & 55 & 55 & 0.17 \\
-Mathematical Sciences & 58 & 58 & 0.13 \\
-Chemical, Thermal Systems &  55 & 54 & 0.12 \\
-Computer and Information Science and Engineering & 51 & 46 & 0.03 \\
-Earth Sciences & 51 & 45 & 0 \\
-Electrical and Communication Systems &  50 & 52 &  0 \\
-\end{tabular}
-}
-\end{table}
 
 \begin{figure}[htb] 
   \centering  
     \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
-  \caption{xsede stacked c}\label{F:xsede-stacked} 
+  \caption{Peers Comparison based on the top most Field of Science category as defined by NSF.}\label{F:xsede-top-c} 
 \end{figure} 
 
 
-\begin{table}[h]
-\caption{The top level Field of Sciences in XSEDE as defined by NSF}
-\label{T:xsede-all-fos}
-\centering
-{\small
-\begin{tabular}{p{0.5\columnwidth}rrr}
-% \begin{tabular}{lrrr}
-FOS & \rot{\shortstack[1]{Avarage \\ ptrank}} & \rot{\shortstack[1]{Median \\ ptrank}} & \rot{Score} \\
-\hline
-Mathematical and Physical Sciences  &  63  &  68  &  0.35 \\
-Geosciences  &  62  &  67  &  0.33 \\
-Biological Sciences  &  61  &  64  &  0.27 \\
-Engineering  &  58  &  62  &  0.2 \\
-Computer and Information Science and Engineering  &   50  &  46  & 0.01 \\
-\end{tabular}
-}
-\end{table}
 
 
 \section{NCAR}
 
-\begin{figure}[htb] 
+\begin{figure}[h!] 
   \centering 
     \includegraphics[width=0.75\columnwidth]{images-new/ncar-a.pdf} 
-  \caption{Pie Chart ncar stacked a}\label{F:ncar-stacked-a} 
-\end{figure} 
+  \caption{Distribution of the top most journals by publication count.}\label{F:ncar-stacked-a} 
 
-\begin{figure}[htb] 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/ncar-b.pdf} 
-  \caption{ncar stacked b}\label{F:ncar-stacked-b} 
-\end{figure} 
+  \caption{Percentile ranging by FOS in a stacked barchart of NCAR publications.}\label{F:ncar-stacked-b} 
 
-\begin{figure}[htb] 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/ncar-c.pdf} 
-  \caption{ncar stacked c}\label{F:ncar-score}
+  \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:ncar-score}
 \end{figure} 
 
 
@@ -547,7 +424,132 @@ This work is part of the Technology Auditing Service (TAS) project sponsored by 
 bib/tas,%
 bib/vonlaszewski-new} 
 
-%\balancecolumns
+\balancecolumns
+
+\clearpage
+
+\appendix
+
+\begin{comment}
+The table with the detailed information is shown in Table
+\ref{T:xsede-raw-1}
+\end{comment}
+
+
+\begin{table}[htb]
+\caption{The top level Field of Sciences in XSEDE as defined by NSF}
+\label{T:xsede-all-fos}
+\centering
+{\tiny
+\begin{tabular}{p{0.5\columnwidth}rrr}
+% \begin{tabular}{lrrr}
+FOS & \rot{\shortstack[1]{Avarage \\ ptrank}} & \rot{\shortstack[1]{Median \\ ptrank}} & \rot{Score} \\
+\hline
+Mathematical and Physical Sciences  &  63  &  68  &  0.35 \\
+Geosciences  &  62  &  67  &  0.33 \\
+Biological Sciences  &  61  &  64  &  0.27 \\
+Engineering  &  58  &  62  &  0.2 \\
+Computer and Information Science and Engineering  &   50  &  46  & 0.01 \\
+\end{tabular}
+}
+
+\bigskip
+
+\caption{Percentile ranking and score of XSEDE publicatiopn data
+  grouped by parent field of science.}
+\label{T:xsede-average-median-percentil-rancing-parent}
+\centering
+{\tiny
+\begin{tabular}{p{0.5\columnwidth}rrr}
+% \begin{tabular}{lrrr}
+FOS   & \rot{\shortstack[1]{Number\\ of Pubs}} &  \rot{\shortstack[1]{average\\ ptrank}}   &    \rot{Score} \\
+\hline
+Astronomical Sciences & 74 & 81 & 0.65 \\
+Physics & 71 & 79 & 0.53 \\
+Ocean Sciences & 65 & 58 & 0.5 \\
+Environmental Biology & 66 & 75 & 0.41 \\
+Geosciences & 64 & 70 & 0.4 \\
+Mechanical and Structural Systems &  66 & 71 & 0.39 \\
+Biological Sciences & 63 & 68 & 0.33 \\
+Mathematical and Physical Sciences & 61 & 66 & 0.31 \\
+Atmospheric Sciences &  61 & 65 & 0.29 \\
+Engineering & 61 & 66 & 0.27 \\
+Chemistry &  58 & 60 & 0.21 \\
+Molecular Biosciences & 58 & 60 & 0.2 \\
+Materials Research & 55 & 55 & 0.17 \\
+Mathematical Sciences & 58 & 58 & 0.13 \\
+Chemical, Thermal Systems &  55 & 54 & 0.12 \\
+Computer and Information Science and Engineering & 51 & 46 & 0.03 \\
+Earth Sciences & 51 & 45 & 0 \\
+Electrical and Communication Systems &  50 & 52 &  0 \\
+\end{tabular}
+}
+
+\bigskip
+
+\caption{Overview of the number of publications, average percentile ranking and performance score for XSEDE publication data based on Field of science.}
+\label{T:xsede-raw-1}
+\centering
+{\tiny
+
+\begin{tabular}{p{0.6\columnwidth}rrr}
+% \begin{tabular}{lrrr}
+
+
+FOS   & \rot{\shortstack[1]{ Number\\ of Pubs}} &  \rot{\shortstack[1]{average\\ ptrank}}   &    \rot{Score} \\
+\hline
+Galactic Astronomy &  14 & 81 &  0.86 \\
+Extragalactic Astronomy and Cosmology &  57 &  74 &  0.68 \\
+Gravitational Physics &  104 &    74 &  0.60 \\
+Nuclear Physics & 5 &   69 &  0.60 \\
+Ocean Sciences  & 5 &   76 &  0.60 \\
+Astronomical Sciences &  187 &    72 &  0.57 \\
+Integrative Biology and Neuroscience &   7 &   77 &  0.57 \\
+Electrical and Communication Systems &   54 &  72 &  0.55 \\
+Planetary Astronomy &    10 &  69 &  0.55 \\
+Stellar Astronomy and Astrophysics &  31 &  72 &  0.53 \\
+Theoretical Physics &    49 &  70 &  0.51 \\
+Physical Oceanography &  5 &   65 &  0.50 \\
+Earth Sciences  & 19 &  64 &  0.47 \\
+Physics & 147 &    67 &  0.45 \\
+Atomic, Molecular, and Optical Physics  & 55 &  68 &  0.45 \\
+Systematic and Population Biology &   37 &  66 &  0.41 \\
+Magnetospheric Physics  & 11 &  65 &  0.41 \\
+Solar Terrestrial Research &  10 &  66 &  0.40 \\
+Elementary Particle Physics &    27 &  66 &  0.39 \\
+Mechanics and Materials & 14 &  66 &  0.39 \\
+Solid State Chemistry and Polymers &  8 &   65 &  0.38 \\
+Atmospheric Sciences &   44 &  63 &  0.35 \\
+Biological and Critical Systems & 6 &   60 &  0.33 \\
+Molecular Biosciences &  494 &    63 &  0.32 \\
+Geophysics &  8 &   61 &  0.31 \\
+Computational Mathematics &   9 &   60 &  0.28 \\
+Biophysics &  323 &    60 &  0.25 \\
+Physical Chemistry &  168 &    60 &  0.25 \\
+Chemistry &   259 &    58 &  0.22 \\
+Fluid, Particulate, and Hydraulic Systems &   51 &  58 & 0.18 \\
+Materials Research &  305 &    55 &  0.17 \\
+Condensed Matter Physics &    61 &  55 &  0.17 \\
+Biochemistry and Molecular Structure and Function &   141 &    53 &  0.08 \\
+Organic and Macromolecular Chemistry &   44 &  51 &  0.07 \\
+Analytical and Surface Chemistry &    7 &   54 &  0.07 \\
+Metals, Ceramics, and Electronic Materials &  11 &  48 & 0.05 \\
+Cross-Disciplinary Activities &  26 &  53 &  0.04 \\
+Chemical, Thermal Systems &   38 &  51 &  0.03 \\
+Chemical and Reaction Processes & 31 &  54 &  0.03 \\
+Interfacial, Transport, and Separations Processes &   17 &  48 &  0.03 \\
+Advanced Scientific Computing &  18 &  48 &  0.00 \\
+Computer and Computation Research &   14 &  49 &  -0.04 \\
+Mechanical and Structural Systems &   14 &  44 &  -0.18 \\
+Geometric Analysis &  5 &   44 &  -0.40 \\
+Training &    5 &   34 &  -0.40 \\
+Experimental and Theoretical Geochemistry &   5 &   34 & -0.50 \\
+\end{tabular}
+}
+\end{table}
+
+\clearpage
+
 \end{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
