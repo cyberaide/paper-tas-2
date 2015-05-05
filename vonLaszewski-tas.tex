@@ -146,7 +146,7 @@ Although a number of related studies have been conducted
 \section{Bibliometric Data Analysis \\Framework for Resource
   \\Providers} \label{S:framework}
 
-The work described in this paper has been motivated by analyzing data related to XSEDE\footnote{The XSEDE data set includes publications from both XSEDE and its predecessor program, TeraGrid. For simplicity, we refer to ÒXSEDEÓ throughout this paper.}. However, as many other resource providers may have similar needs to analyze their data, this framework is general enough that it can be adapted for use by other resource providers. In case this is desired, a custom integration can be performed and the analysis can be adapted by the team from Indiana University. 
+The work described in this paper has been motivated by analyzing data related to XSEDE\footnote{The XSEDE data set includes publications from both XSEDE and its predecessor program, TeraGrid. For simplicity, we refer to {\em XSEDE} throughout this paper.}. However, as many other resource providers may have similar needs to analyze their data, this framework is general enough that it can be adapted for use by other resource providers. In case this is desired, a custom integration can be performed and the analysis can be adapted by the team from Indiana University. 
 
 
 \subsection{Requirements}
@@ -155,7 +155,7 @@ The motivation for the framework includes three main objectives.  First, our fra
 
 \subsection{Design}
 
-NOTE: OTHERS DELETED
+% NOTE: OTHERS DELETED
 
 For XSEDE we have identified specific design criteria that we are integrating into our architecture. Many of these design decisions will overlap with other resource providers. Certainly our design needs to be able to provide a comparative impact study for peers and also the funding agencies of the peers in conjunction with meaningful metrics. The metrics must be not only targeting the resource provider but also the community. Specifically for XSEDE interested parties in this analysis are not only the users, but also the Resource Allocation Committee (RAC) and the XSEDE leadership. The bibliometric data services and the data mashup are largely hidden from these groups. The groups benefit form a number of preconfigured analysis that may be further customized or enhanced. To show generality of this approach we have taken an analysis and applied it not only to XSEDE as a resource provider, but also to National Center for Atmospheric Research (NCAR) as a resource provider \cite{www-ncar}.
 
@@ -177,7 +177,7 @@ For XSEDE we have identified specific design criteria that we are integrating in
 
 \subsection{Architecture}
 
-\footnote(produced using XSEDE resources)
+%\footnote{produced using XSEDE resources}
 The requirements for XSEDE and our user community have resulted in a layered architecture as depicted in \ref{F:architecture}.  The framework is based on a distributed set of services.  The service-oriented system consists of components for (a) publication and citation data retrieval (e.g., from the NSF award database, Google Scholar, and ISI Web of Science); (b) parsing and processing while correlating data from various databases and services, such as the XSEDE central database (XDCDB), which stores all usage data for jobs run on XSEDE resources; and (c) the XSEDE allocations database, which stores publication and grant funding information for PIs applying for XSEDE allocations.  The system also includes components for metrics generation and an analysis system for different aggregation levels -- users, projects, organization, field of science (FOS) -- as well as a presentation layer using a lightweight portal in addition to exposing some data via a RESTful API \cite{las14impact}.  The main layers include (a) {\em Interface Layer} -- easy to use interfaces for various communities, including an API, REST, and a Web GUI interface; (b) {\em Service Layer} -- advanced services to bridge to a database mashup via sophisticated services and queries to the underlying database layer; (c) {\em Database Mashup Service Layer} -- a sophisticated database mashup that contains the integration of data from a variety of data resources; and (d) the {\em Database Resources} that provide the underlying information for our service.
 
 Due to this approach, our framework is expandable as we are able to integrate not only resources relevant for XSEDE, but also other resource providers such as NCAR. However, we need to customize this integration and allow relevant services to be exposed to the framework. In some cases it could be as simple as replacing the database with a minor adaptation in the service layer.
