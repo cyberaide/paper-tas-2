@@ -1,12 +1,20 @@
-FILE=vonLaszewski-tas
+#FILE=vonLaszewski-tas
 
-
+FILE-xsede=vonLaszewski-tas-xsede
+FILE-cluster=vonLaszewski-tas-cluster
 
 all:
 	pdflatex ${FILE}
 	bibtex ${FILE}
 	pdflatex ${FILE}
 	pdflatex ${FILE}
+
+xsede:
+	make -f Makefile FILE=$(FILE-xsede)
+
+cluster:
+	make -f Makefile FILE=$(FILE-cluster)
+
 
 google:
 	time google docs get --title "${FILE}.tex" ${FILE}.txt
