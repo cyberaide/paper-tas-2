@@ -144,12 +144,6 @@ The work described in this paper has been motivated by analyzing data related to
 
 The motivation for the framework includes three main objectives.  First, our framework must be able to compare the impact of the use of resources on their users. Second, we have to define suitable metrics that allow such a comparison. Third, we need to provide a framework that provides an integrated set of data services on which these metrics can be applied to conduct a comparative impact analysis. This is depicted in Figure \ref{F:objectives} on the left-hand side.
 
-\subsection{Design}
-
-% NOTE: OTHERS DELETED
-
-For XSEDE we have identified specific design criteria that we are integrating into our architecture. Many of these design decisions will overlap with other resource providers. Certainly our design needs to be able to provide a comparative impact study for peers and also the funding agencies of the peers in conjunction with meaningful metrics. The metrics must be not only targeting the resource provider but also the community. Specifically for XSEDE interested parties in this analysis are not only the users, but also the Resource Allocation Committee (RAC) and the XSEDE leadership. The bibliometric data services and the data mashup are largely hidden from these groups. The groups benefit form a number of preconfigured analysis that may be further customized or enhanced. To show generality of this approach we have taken an analysis and applied it not only to XSEDE as a resource provider, but also to National Center for Atmospheric Research (NCAR) as a resource provider \cite{www-ncar}.
-
 \begin{figure}[htb] 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
@@ -170,7 +164,6 @@ For XSEDE we have identified specific design criteria that we are integrating in
 The requirements for XSEDE and our user community have resulted in a layered architecture as depicted in \ref{F:architecture}.  The framework is based on a distributed set of services.  The service-oriented system consists of components for (a) publication and citation data retrieval (e.g., from the NSF award database, Google Scholar, and ISI Web of Science); (b) parsing and processing while correlating data from various databases and services, such as the XSEDE central database (XDCDB), which stores all usage data for jobs run on XSEDE resources; and (c) the XSEDE allocations database, which stores publication and grant funding information for PIs applying for XSEDE allocations.  The system also includes components for metrics generation and an analysis system for different aggregation levels -- users, projects, organization, field of science (FOS) -- as well as a presentation layer using a lightweight portal in addition to exposing some data via a RESTful API \cite{las14impact}.  The main layers include (a) {\em Interface Layer} -- easy to use interfaces for various communities, including an API, REST, and a Web GUI interface; (b) {\em Service Layer} -- advanced services to bridge to a database mashup via sophisticated services and queries to the underlying database layer; (c) {\em Database Mashup Service Layer} -- a sophisticated database mashup that contains the integration of data from a variety of data resources; and (d) the {\em Database Resources} that provide the underlying information for our service.
 
 Due to this approach, our framework is expandable as we are able to integrate not only resources relevant for XSEDE, but also other resource providers such as NCAR. However, we need to customize this integration and allow relevant services to be exposed to the framework. In some cases it could be as simple as replacing the database with a minor adaptation in the service layer.
-
 
 
 Our current framework for XSEDE includes specialized services focusing on XSEDE user specific publication data as well as user, project, and FOS views. The mashup component aggregates the publication data mined from the previous component, in addition to those from XDCDB, and from other available external services. It also retrieves citation data for each publication from external services. Another essential task of this framework is to generate metrics for users, projects, and FOS, in which the XSEDE allocations database is involved to get proposal and project data. These data will be stored in the mashup database, which can then be integrated into the XDMoD system \cite{Furlani:2013:UXF:2484762.2484763} by our partners at the University of Buffalo.
@@ -194,56 +187,9 @@ It is trivial to see that $S$ has its value from $[-1, 1]$. A positive value imp
 \section{XSEDE Peer Data Analysis}
 \label{S:xsede}
 
-To apply the percentile ranking to the field of science of XSEDE/TG publications among the journal issues where each publication was published, we aggregate them based on FOS, according to the self-reported categories defined in the XDCDB, and calculate the average and median percentile ranking for each field of science, as well as the resulting  \emph{performance score}. We include only those with at least ten\footnote{For NCAR data, we used a value of five due to the smaller number of overall publications} publications so the results have a higher statistical power. 
+To apply the percentile ranking to the field of science of XSEDE/TG publications among the journal issues where each publication was published, we aggregate them based on FOS, and calculate the average and median percentile ranking for each field of science, as well as the resulting  \emph{performance score}. We include only those with at least ten\footnote{For NCAR data, we used a value of five due to the smaller number of overall publications} publications so the results have a higher statistical power. 
 
-To identify the FOS for each publication, we followed this process:
-
-\begin{enumerate}
-
-\item Find the FOS information out of the past XSEDE/TG quarterly reports as this information may have explicitly been associated with them.
-
-\item Find the FOS information from the project data in the XDCDB. Unfortunately, it is possible that one project is associated with more than one FOS. In such cases we counted the publications of the project for all involved FOSs.
-
-\begin{enumerate}
-
-\item Some publications from XSEDE/TG quarterly reports were identified only by the project proposal number. We mapped them to the project charge number and account id used internally within the XSEDE central database.
-
-\item For user uploaded publications data via the XSEDE user portal, a project charge number was associated with each publication.
-
-\end{enumerate}
-
-\end{enumerate}
-
-Through this data mashup we obtained enough data to conduct our analysis.
-We present our results in a number of graphs and tables. We first present some overall comparisons of the XSEDE and non-XSEDE citation comparisons. Figure \ref{F:xd_peers_density} shows the kernel density of the distributions of XSEDE publications' percentile ranking and that of peers'.  As expected, the non-XSEDE peer publications are symmetrically distributed by percentile ranking.  The XSEDE publications are weighted to the higher percentile ranking. {\em This shows that XSEDE publications tend to be more highly cited.} Table \ref{T:groups_stats} lists the average and median rankings and citations received of the two groups to evaluate and compare. We performed a T-test to test if the citation differences were statistically significant. The results show that the XSEDE group has a statistically higher citation ranking and a statistically higher  mean citation rate than the non-XSEDE peer group.
-
-\begin{enumerate}
-\item T-test for ranking (Welch Two sample t-test)
-\begin{enumerate}
-\item T=21.4134, df=2412.99, p-value<2.2e-16
-\item 95\% confidence interval: $[10.80, 12.98]$
-\end{enumerate}
-\item T-test for citation count:
-\begin{enumerate}
-\item T=7.057, df=2358.929, p-value=2.228e-12
-\item 95\% confidence interval: $[9.40, 16.63]$
-\end{enumerate}
-\end{enumerate}
- 
-
-\begin{figure}[htb!]
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/xd_peers_density.pdf} 
-  \caption{Kernel density of distributions for XSEDE publication percentile ranking versus peers.}\label{F:xd_peers_density} 
-
-\includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
-\caption{The score of our peer comparison metric for XSEDE publications by journal.}\label{F:xsede-score} 
-    \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
-  \caption{Peers comparison based on the topmost Field of Science category as defined by NSF.}\label{F:xsede-top-c} 
-
-\hfill
-
-\end{figure} 
+Table \ref{T:groups_stats} lists the average and median rankings and citations received of the two groups to evaluate and compare. The results from t-test show that the XSEDE group has a statistically higher citation ranking and a statistically higher  mean citation rate than the non-XSEDE peer group.
 
 \begin{table}[h!]
 \caption{Basic statistics of XSEDE publications group and peers group}
@@ -260,31 +206,50 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 \end{small}
 \end{table}
 
+\begin{enumerate}
+\item T-test for ranking (Welch Two sample t-test)
+\begin{enumerate}
+\item T=21.4134, df=2412.99, p-value<2.2e-16
+\item 95\% confidence interval: $[10.80, 12.98]$
+\end{enumerate}
+\item T-test for citation count:
+\begin{enumerate}
+\item T=7.057, df=2358.929, p-value=2.228e-12
+\item 95\% confidence interval: $[9.40, 16.63]$
+\end{enumerate}
+\end{enumerate}
+
+\begin{figure}[htb!]
+\includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
+\caption{The score of our peer comparison metric for XSEDE publications by journal.}\label{F:xsede-score}
+    \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
+  \caption{Peers comparison based on the topmost Field of Science category as defined by NSF.}\label{F:xsede-top-c} 
+
+\hfill
+
+\end{figure} 
+
 
 \begin{figure*}[htb!] 
   \centering 
     \includegraphics[width=1.0\textwidth]{images-new/xsede-journal-stacked.pdf} 
-  \caption{Percentile ranging by FOS in a stacked barchart of XSEDE publications.}\label{F:xsede-stacked} 
+  \caption{Percentile ranking by journal in a stacked barchart of XSEDE publications.}\label{F:xsede-stacked} 
 \end{figure*}
 
 \bigskip
 
 \begin{figure*}[htb!] 
   \centering 
-    \includegraphics[width=.9\textwidth]{images-new/a.pdf} 
-  \caption{Peer comparison based on Field of Science of XSEDE publications.}\label{F:xsede-fos-a} 
-
-  \centering 
     \includegraphics[width=.9\textwidth]{images-new/b.pdf} 
   \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:xsede-stacked-b} 
 
 \end{figure*} 
 
-The results are depicted in Figures \ref{F:xsede-stacked}, \ref{F:xsede-fos-a}, \ref{F:xsede-stacked-b}, \ref{F:xsede-score}, and \ref{F:xsede-top-c}. 
+The results are depicted in Figures \ref{F:xsede-stacked}, \ref{F:xsede-stacked-b}, \ref{F:xsede-score}, and \ref{F:xsede-top-c}. 
 
 NSF and XSEDE define a hierarchy of FOSs. In Figure \ref{F:xsede-top-c}, we show the top level FOS as defined by NSF. When we look to expand the FOS to the next level in the hierarchy, we find the results as depicted in Figure \ref{F:xsede-stacked-b}. The next level is shown in Figure \ref{F:xsede-fos-a}. Each of these figures shows the list of FOSs in decreasing order by the performance score $S$. 
 
-From Figure \ref{F:xsede-fos-a} we can identify that for most fields of science the XSEDE publications performed better than their peers. The average and median scores were higher than 50 and the score is positive. When looking at individual results, we see that astronomy and physics benefit most from using XSEDE/TG. When looking at the fields that perform worst, we find fields such as Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems. Such fields are typically not dominated by simulation science and are less dependent on computational resources. Other fields such as Training include many other areas of training outside of supercomputing usage. We even find fields such as Computer and Computation Research to be less impacted. We certainly have to acknowledge in this case that many theoretical papers and papers not using supercomputers are published. 
+From Figure \ref{F:xsede-fos-b} we can identify that for most fields of science the XSEDE publications performed better than their peers. The average and median scores were higher than 50 and the score is positive. When looking at individual results, we see that astronomy and physics benefit most from using XSEDE/TG. When looking at the fields that perform worst, we find fields such as Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems. Such fields are typically not dominated by simulation science and are less dependent on computational resources. Other fields such as Training include many other areas of training outside of supercomputing usage. We even find fields such as Computer and Computation Research to be less impacted. We certainly have to acknowledge in this case that many theoretical papers and papers not using supercomputers are published. 
 
 To show the percentile distribution in more detail for each journal, we present in Figure \ref{F:xsede-stacked} a stacked barchart. Also here, as expected from our previous results, we see a positive impact in the percentile citation count for most of the journals. This is made obvious by looking at Figure \ref{F:xsede-score}. Here we also have included the average of the top 66 journals in which we found 10 or more XSEDE publications and find that the score metric is positive with a value of 0.284. Thus we can conclude that papers benefit from use of XSEDE resources, based on self-identification in reports and bibliographic upload to the XSEDE portal, resulting in their being more cited on average than their peers from the same journal.
 
