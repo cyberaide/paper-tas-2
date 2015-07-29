@@ -174,7 +174,7 @@ performance measures]
 
 \section{Introduction} 
 
-To identify the impact on {\em scientific advancements enabled by enhanced cyberinfrastructure}, it is important to conduct a comprehensive analysis of achievements that can be attributed to the use of advanced infrastructure, such as provided by the Extreme Science and Discovery Environment (XSEDE) \cite{www-xsede,xsede}. In previous work \cite{las14impact} we focused on the creation of a framework that collects bibliometric data and analyzes them with respect to a number of metrics. In this paper, we significantly enhance our previous work by comparing publication impact based on a comprehensive peer analysis carried out on papers produced by scientists using XSEDE and National Center for Atmospheric Research (NCAR) resources. The analysis is based on a percentile ranking of citations of the papers derived from a comparison to peer publications in the same journal not using the resources. The result shows that papers that utilize XSEDE and NCAR resources tend to be cited more often than their peers are cited.
+To identify the impact on {\em scientific advancements enabled by enhanced cyberinfrastructure}, it is important to conduct a comprehensive analysis of achievements that can be attributed to the use of advanced infrastructure, such as provided by the Extreme Science and Discovery Environment (XSEDE). In previous work \cite{las14impact} we focused on the creation of a framework that collects bibliometric data and analyzes them with respect to a number of metrics. In this paper, we significantly enhance our previous work by comparing publication impact based on a comprehensive peer analysis carried out on papers produced by scientists using XSEDE and National Center for Atmospheric Research (NCAR) resources. The analysis is based on a percentile ranking of citations of the papers derived from a comparison to peer publications in the same journal not using the resources. The result shows that papers that utilize XSEDE and NCAR resources tend to be cited more often than their peers are cited.
 
 The paper is structured as follows. First, we review our design and the architecture of our framework supporting this effort (Section~\ref{S:framework}). Next we introduce a journal-based peer metric that allows us to compare any resource provider's related publications with publications not using the resources (Section~\ref{S:metric}).  To demonstrate general applicability of this method, we introduce in the next section a peer analysis of XSEDE (Section \ref{S:xsede}) and NCAR data (Section~\ref{S:ncar}). We present important statistics about this metric for both XSEDE and NCAR. Finally, we present our conclusions (Section~\ref{S:conclusion}).
 
@@ -188,6 +188,7 @@ The work described in this paper has been motivated by analyzing data related to
 
 The motivation for the framework includes three main objectives.  First, our framework must be able to compare the impact of the use of resources on their users. Second, we have to define suitable metrics that allow such a comparison. Third, we need to provide a framework that provides an integrated set of data services on which these metrics can be applied to conduct a comparative impact analysis. This is depicted in Figure \ref{F:objectives} on the left-hand side.
 
+\begin{comment}
 \begin{figure}[htb] 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/objectives.pdf} 
@@ -201,6 +202,7 @@ The motivation for the framework includes three main objectives.  First, our fra
   \caption{Architecture with the Interface, Service, Database Mashup,
     and Database Resources Layers}\label{F:architecture} 
 \end{figure} 
+\end{comment}
 
 \subsection{Architecture}
 
@@ -216,7 +218,7 @@ To conduct the analysis, the general workflow includes obtaining the publication
 
 \section{Metric for Journal Publication-based Peer Comparison} \label{S:metric}
 
-While we focused in our previous work more on the internal analysis of data within XSEDE in regards to FOS, h-index \cite{hirsch2005index}, g-index \cite{www-i10index} and i-index \cite{egghe2006theory}, in this work we extend the scope to a comparison with external peer publications and hence significantly expand our original analysis. To conduct this analysis, we introduce the definition of a metric that allows us to analyze and compare journal publications amongst peers, as well as identify a suitable peer group for the comparison.
+While we focused in our previous work more on the internal analysis of data within XSEDE in regards to FOS, h-index, g-index and i-index, in this work we extend the scope to a comparison with external peer publications and hence significantly expand our original analysis. To conduct this analysis, we introduce the definition of a metric that allows us to analyze and compare journal publications amongst peers, as well as identify a suitable peer group for the comparison.
 
 Hence we considered for this work {\em\bf all} publications that are uploaded through self-identification by users into the XSEDE portal, as well as XSEDE reports. We then identified from this set all {\em all} journal publications and identified from that subset all journals that had at least ten self-identified publications from XSEDE. Although the number to meet this threshold is small, we found the restriction useful as it defines a peer group of scientists that publish repeatedly in these journals, thus making the comparison more meaningful. Once we identified such journals, we compared the citation count for each publication located in a journal issue that had at least one XSEDE publication. Our comparison is between publications in such journals that we identified as XSEDE papers and those that were not. 
 
@@ -263,15 +265,37 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 \end{enumerate}
 \end{enumerate}
 
-\begin{figure}[htb!]
+
+
+\begin{figure}[h!]
 \includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
+\vspace{-6pt}
 \caption{The score of our peer comparison metric for XSEDE publications by journal.}\label{F:xsede-score}
+
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/b.pdf} 
+\vspace{-18pt}
+  \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:xsede-stacked-b} 
+
+  \centering 
+    \includegraphics[width=1.0\columnwidth]{images-new/ncar-c.pdf} 
+\vspace{-18pt}
+  \caption{Peer comparison based on Parent Field of Science from the original analysis of NCAR data.}\label{F:ncar-score}
+\end{figure} 
+
+
+
+
+
+
+
+\begin{comment}
+
     \includegraphics[width=1.0\columnwidth]{images-new/c.pdf} 
   \caption{Peers comparison based on the topmost Field of Science category as defined by NSF.}\label{F:xsede-top-c} 
 
 \hfill
 
-\end{figure} 
 
 
 \begin{figure*}[htb!] 
@@ -282,12 +306,8 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 
 \bigskip
 
-\begin{figure*}[htb!] 
-  \centering 
-    \includegraphics[width=.9\textwidth]{images-new/b.pdf} 
-  \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:xsede-stacked-b} 
+\end{comment}
 
-\end{figure*} 
 
 The results are depicted in Figures \ref{F:xsede-stacked}, \ref{F:xsede-stacked-b}, \ref{F:xsede-score}, and \ref{F:xsede-top-c}. 
 
@@ -299,7 +319,7 @@ To show the percentile distribution in more detail for each journal, we present 
 
 \section{NCAR Peer Data Analysis}\label{S:ncar}
 
-\begin{figure}[h!] 
+\begin{comment}
   \centering 
     \includegraphics[width=0.75\columnwidth]{images-new/ncar-a.pdf} 
   \caption{Distribution of the top most journals by publication count.}\label{F:ncar-distribution} 
@@ -307,11 +327,9 @@ To show the percentile distribution in more detail for each journal, we present 
   \centering 
     \includegraphics[width=1.0\columnwidth]{images-new/ncar-b.pdf} 
   \caption{Percentile ranging by FOS in a stacked barchart of NCAR publications.}\label{F:ncar-stacked-b} 
+\end{comment}
 
-  \centering 
-    \includegraphics[width=1.0\columnwidth]{images-new/ncar-c.pdf} 
-  \caption{Peer comparison based on Parent Field of Science from the original analysis of XSEDE data.}\label{F:ncar-score}
-\end{figure} 
+
 
 We have replicated the publication citation analysis with a text file of 880 publications obtained from NCAR. Because the NCAR data set was smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis in this case. To conduct the analysis, we took the following steps.
 
@@ -347,8 +365,7 @@ We will further expand upon our metric and can define such values also for other
 
 \section{Acknowledgments}
 
- 
-This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI-1025159. Lessons learned from FutureGrid have significantly influenced this work. Gathering publications was first pioneered by FutureGrid, influencing the development in the XSEDE portal. We would like to thank Matt Hanlon and Maytal Dahan for their efforts to integrate this framework into the XSEDE portal. 
+Sponsored by NSF under grant number OCI-1025159. Lessons learned from FutureGrid have significantly influenced this work. 
  
 
 %\bibliographystyle{IEEEtranS}
@@ -356,6 +373,7 @@ This work is part of the Technology Auditing Service (TAS) project sponsored by 
 \bibliographystyle{IEEEtran}
 \bibliography{% 
 bib/tas,%
+bib/vonlaszewski-jabref,%
 bib/vonlaszewski-new} 
 
 
