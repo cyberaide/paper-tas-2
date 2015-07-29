@@ -156,7 +156,7 @@ $^3$Center for Computational Research, University at Buffalo, SUNY, Buffalo, New
 
 \begin{abstract}
 
-We present a framework that compares the publication impact based on a comprehensive peer analysis of papers produced by scientists using XSEDE and NCAR resources. The analysis is introducing a percentile ranking of citations of the XSEDE and NCAR papers compared to peer publications in the same journal that do not use these resources.  This analysis is unique in that it is a comprehensive study in which all reported published papers are compered to peer publications selected from within the same issue of the same journal. From this analysis, we can see that papers that utilize XSEDE and NCAR resources are cited statistically significantly more often.  Hence we find that reported publications indicate that XSEDE and NCAR resources exert a strong positive impact on scientific research.
+We present a framework that compares the publication impact based on a comprehensive peer analysis of papers produced by scientists using XSEDE and NCAR resources. The analysis is introducing a percentile ranking based approach of citations of the XSEDE and NCAR papers compared to peer publications in the same journal that do not use these resources.  This analysis is unique in that it evaluates the impact of the two facilities by comparing the reported publications from them to their peers from within the same journal issue. From this analysis, we can see that papers that utilize XSEDE and NCAR resources are cited statistically significantly more often.  Hence we find that reported publications indicate that XSEDE and NCAR resources exert a strong positive impact on scientific research.
 
 \end{abstract}
 
@@ -181,27 +181,27 @@ performance measures]
 \section{Introduction} 
 
 
-We analyze the scientific impact on {\em scientific advancements enabled by enhanced cyberinfrastructure} for XSEDE and NCAR resources. We extend our previous work \cite{las14impact} by comparing publication impact based on a comprehensive peer analysis carried out on papers produced by scientists using XSEDE and National Center for Atmospheric Research (NCAR) resources \cite{las15cluster-long,las15xsede}. The analysis is based on a percentile ranking of citations of the papers derived from a comparison to peer publications in the same journal not using the resources. The result shows that papers that utilize XSEDE and NCAR resources tend to be cited more often than their peers are cited. We leverage for our work our data collection architecture described in \cite{las14impact,las15cluster-long}. To conduct the analysis, the general workflow includes obtaining the publication data for each XSEDE user, and then retrieving the citation data for each publication. Hence, the data is originally collected on a per-user and per-publication basis. As part of processing, the data are aggregated based on organization, XSEDE project/account, and FOS.  By correlating the publication data with XSEDE usage and allocation data (for example the allocation amounts awarded by XSEDE), our intention is to determine if the analysis reveals patterns and trends in how XSEDE impacts the sciences and possibly to help better measure the return on investment (ROI) for NSF. Naturally, the same is applied to the NCAR data to demonstrate the generality of our methods.
+We analyze the scientific impact on {\em scientific advancements enabled by enhanced cyberinfrastructure} for XSEDE and NCAR resources. We extend our previous work \cite{las14impact} by comparing publication impact based on a comprehensive peer analysis carried out on papers produced by scientists using XSEDE and National Center for Atmospheric Research (NCAR) resources \cite{las15cluster-long,las15xsede}. The analysis is based on a percentile ranking of citations of the papers derived from a comparison to peer publications in the same journal not using the resources. The result shows that papers that utilize XSEDE and NCAR resources tend to be cited more often than their peers are cited. We leverage for this work the data collection and processing architecture described in \cite{las14impact,las15cluster-long}. To conduct the analysis, the general workflow includes obtaining the publication data for each XSEDE user, and then retrieving the citation data for each publication. Hence, the data is originally collected on a per-user and per-publication basis. As part of processing, the data are aggregated based on organization, XSEDE project/account, and FOS.  By correlating the publication data with XSEDE usage and allocation data (for example the allocation amounts awarded by XSEDE), our intention is to determine if the analysis reveals patterns and trends in how XSEDE impacts the sciences and possibly to help better measure the return on investment (ROI) for NSF. Naturally, the same is applied to the NCAR data to demonstrate the generality of our methods.
 
 \section{Metric for Journal Publication-based Peer Comparison} \label{S:metric}
 
-We compared XSEDE and NCAR publications with their peers (more than one million publication) by looking at the citation count and relative ranking  through the following process: 
+We compared XSEDE and NCAR publications with their peers (more than one million publication) by looking at the citation count and relative ranking through the following process: 
 (1) Identify publication venues of the reported XSEDE or NCAR publications;
 (2) Retrieve all publication data from those venues during the same time period;
 (3) Identify the peers comparison groups (All publications in same journal issues);
-(4) Calculate ranking scores of XSEDE publications and their peers; and
+(4) Calculate ranking scores of XSEDE/NCAR publications and their peers; and
 (5) Use the raw ranking scores to derive comparison metrics at different aggregation level (e.g. journal, Field of Study).
 
-We defined a performance score based on weighted sums of the percentages of publications falling into each quarter by percentile ranking:
+We defined a \emph{performance score} based on weighted sum of the percentages of publications falling into each quarter by percentile ranking:
 
 \[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
 
-wher, $P_{Q_i}$ is the percentage of publications falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS. As $S$ has a range from $[-1, 1]$,  a positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
+wher, $P_{Q_i}$ is the percentage of publications falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one aggregated subject (a journal or one FOS). As $S$ has a range from $[-1, 1]$ and the possible values are symmetric, a positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
 
 \section{XSEDE Peer Data Analysis}
 \label{S:xsede}
 
-To apply the percentile ranking among the journal issues where each publication was published. Furthermore, we aggregate them based on FOS, and calculate the average and median percentile ranking for each field of science, as well as the resulting  \emph{performance score}. We include only those with at least ten\footnote{For NCAR data, we used a value of five due to the smaller number of overall publications} publications so the results have a higher statistical power. Table \ref{T:groups_stats} compares the average and median rankings and citations received. The t-test shows that XSEDE publications are statistically higher ranking and have a higher  mean citation rate than the non-XSEDE peer group.
+We apply the procedure and then aggregate the raw percentile ranking scores at journal level, and calculate the average and median percentile ranking for each journal, as well as the resulting \emph{performance score}. We include only those journals with at least ten\footnote{For NCAR data, we used a value of five due to the smaller number of overall publications} publications so the results have a higher statistical power. Table \ref{T:groups_stats} compares the average and median rankings and citations received. The t-test shows that XSEDE publications are statistically higher ranking and have a higher  mean citation rate than the non-XSEDE peer group.
 
 \begin{table}[h!]
 \caption{Basic statistics of XSEDE publications group and peers group}
@@ -274,9 +274,9 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 
 \end{comment}
 
-We found that for most fields of science the XSEDE publications performed better than their peers. The average and median scores were higher than 50 and the score is positive. Astronomy and physics benefit most from using XSEDE. Fields that perform worst include Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems as they are typically not dependent on computational resources.
+we included the performance scores of the top 66 journals in which 10 or more XSEDE publications published (see Figure \ref{F:xsede-score}) and find that the overal score metric for all the involved journals is positive with a value of 0.284. This implies that researches benefit from use of XSEDE resources as the resulting publications tend to be cited more than their peers from the same journal.
 
-We see a positive impact in the percentile citation count for most of the journals (see Figure \ref{F:xsede-score}). Here we included the average of the top 66 journals in which we found 10 or more XSEDE publications and find that the score metric is positive with a value of 0.284. We conclude that papers benefit from use of XSEDE resources, based on self-identification in reports and bibliographic upload to the XSEDE portal, resulting in their being more cited on average than their peers from the same journal.
+When aggregating the individual results on Field of Science (FOS) level we observe similar results that publications from most FOS performe better than their peers, while certain FOS such as Astronomy and physics benefit most from using XSEDE \cite{las15cluster-long,las15xsede}. Fields that perform not as good include Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems as they are typically not dependent on computational resources.
 
 \section{NCAR Peer Data Analysis}\label{S:ncar}
 
@@ -290,11 +290,11 @@ We see a positive impact in the percentile citation count for most of the journa
   \caption{Percentile ranging by FOS in a stacked barchart of NCAR publications.}\label{F:ncar-stacked-b} 
 \end{comment}
 
-We replicated analysis with NCAR publication data of 900 records. Because the NCAR data set is smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis in this case. The \emph{performance score} as defined earlier is presented as in Figure \ref{F:ncar-score} as a comparison with XSEDE. Again we see a positive value of about 0.35 indicating the better performance than the peers'.
+We replicated the analysis with NCAR publication data of 900 records. Because the NCAR data set is smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis in this case. The \emph{performance score} as defined earlier is presented as in Figure \ref{F:ncar-score} as a comparison with XSEDE. Again we see a positive value of about 0.35 indicating the better performance than the peers'.
 
 \section{Conclusion} \label{S:conclusion}
 
-The NCAR score is slightly higher than that of XSEDE as XSEDE has a wider range of FOS. Computational intense disciplines such as atmospheric sciences result in the highest score values using the resources. For both XSEDE and NCAR publications, the impact measured by a percentile score is positive and higher than their peers that have not used such resources.
+The NCAR score is slightly higher than that of XSEDE as XSEDE has a wider range of FOS. Computational intense disciplines such as atmospheric sciences result in the highest score values using the resources. For both XSEDE and NCAR publications, the impact metric measured by a performance score (defined based on percentile ranking) is positive and higher than their peers that have not used such resources.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 % Acknowledgment 
