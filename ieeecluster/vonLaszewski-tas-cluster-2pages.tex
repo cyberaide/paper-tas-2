@@ -21,7 +21,7 @@
 % \usepackage{rotating} 
 % \usepackage{color} 
 \usepackage{caption}
-\captionsetup{font={scriptsize}}
+%\captionsetup{font={scriptsize}}
 
 \newcommand*\rot{\rotatebox{90}} 
  
@@ -185,23 +185,23 @@ We analyze the scientific impact on {\em scientific advancements enabled by enha
 
 \section{Metric for Journal Publication-based Peer Comparison} \label{S:metric}
 
-We compared XSEDE and NCAR publications with their peers (more than one million publication) by looking at the citation count and relative ranking through the following process: 
+We compare XSEDE and NCAR publications with their peers (more than one million publication) by looking at the citation count and relative ranking through the following process: 
 (1) Identify publication venues of the reported XSEDE or NCAR publications;
 (2) Retrieve all publication data from those venues during the same time period;
-(3) Identify the peers comparison groups (All publications in same journal issues);
+(3) Identify the peers comparison groups (all publications in same journal issues);
 (4) Calculate ranking scores of XSEDE/NCAR publications and their peers; and
 (5) Use the raw ranking scores to derive comparison metrics at different aggregation level (e.g. journal, Field of Study).
 
-We defined a \emph{performance score} based on weighted sum of the percentages of publications falling into each quarter by percentile ranking:
+We define a \emph{performance score} based on weighted sum of the percentages of publications falling into each quarter by percentile ranking:
 
 \[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
 
-wher, $P_{Q_i}$ is the percentage of publications falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one aggregated subject (a journal or one FOS). As $S$ has a range from $[-1, 1]$ and the possible values are symmetric, a positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
+where, $P_{Q_i}$ is the percentage of publications falling into the top $i$-th quarter, $P_{Q_i} \in [0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one aggregated subject (a journal or one FOS). As $S \in [-1, 1]$ and the possible values are symmetric, a positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
 
 \section{XSEDE Peer Data Analysis}
 \label{S:xsede}
 
-We apply the procedure and then aggregate the raw percentile ranking scores at journal level, and calculate the average and median percentile ranking for each journal, as well as the resulting \emph{performance score}. We include only those journals with at least ten\footnote{For NCAR data, we used a value of five due to the smaller number of overall publications} publications so the results have a higher statistical power. Table \ref{T:groups_stats} compares the average and median rankings and citations received. The t-test shows that XSEDE publications are statistically higher ranking and have a higher  mean citation rate than the non-XSEDE peer group.
+We apply the procedure and then aggregate the raw percentile ranking scores at journal level, and calculate the average and median percentile ranking for each journal, as well as the resulting \emph{performance score}. We include only those journals with at least ten publications so the results has a higher statistical relevance. Table \ref{T:groups_stats} compares the average and median rankings and citations received. The t-test shows that XSEDE publications are statistically higher ranking and have a higher  mean citation rate than the non-XSEDE peer group.
 
 \begin{table}[h!]
 \caption{Basic statistics of XSEDE publications group and peers group}
@@ -276,7 +276,7 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 
 we included the performance scores of the top 66 journals in which 10 or more XSEDE publications published (see Figure \ref{F:xsede-score}) and find that the overal score metric for all the involved journals is positive with a value of 0.284. This implies that researches benefit from use of XSEDE resources as the resulting publications tend to be cited more than their peers from the same journal.
 
-When aggregating the individual results on Field of Science (FOS) level we observe similar results that publications from most FOS performe better than their peers, while certain FOS such as Astronomy and physics benefit most from using XSEDE \cite{las15cluster-long,las15xsede}. Fields that perform not as good include Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems as they are typically not dependent on computational resources.
+When aggregating the individual results on the Field of Science (FOS) categories we observe \cite{las15cluster-long}  similar results as publications from most FOS perform better than their peers, while certain FOS such as Astronomy and physics benefit most from using XSEDE. Fields that perform not as good include Experimental and Theoretical Geochemistry, Geometric Analysis and Mechanical and Structural systems as they are typically not dependent on computational resources.
 
 \section{NCAR Peer Data Analysis}\label{S:ncar}
 
@@ -290,7 +290,7 @@ When aggregating the individual results on Field of Science (FOS) level we obser
   \caption{Percentile ranging by FOS in a stacked barchart of NCAR publications.}\label{F:ncar-stacked-b} 
 \end{comment}
 
-We replicated the analysis with NCAR publication data of 900 records. Because the NCAR data set is smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis in this case. The \emph{performance score} as defined earlier is presented as in Figure \ref{F:ncar-score} as a comparison with XSEDE. Again we see a positive value of about 0.35 indicating the better performance than the peers'.
+We replicated the analysis with NCAR publication data of 900 records. Because the NCAR data set is smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis. The \emph{performance score} as defined earlier is presented as in Figure \ref{F:ncar-score}. We observe a positive value of about 0.35 indicating the better performance than the peers'.
 
 \section{Conclusion} \label{S:conclusion}
 
