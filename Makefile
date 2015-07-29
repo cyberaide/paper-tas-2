@@ -1,5 +1,5 @@
 FILE=vonLaszewski-tas
-#FILE=vonLaszewski-tas-cluster-2pages
+VIEW=vonLaszewski-tas-cluster-2pages
 
 #FILE-xsede=vonLaszewski-tas-xsede
 #FILE-cluster=vonLaszewski-tas-cluster
@@ -30,14 +30,14 @@ clean:
 	rm -rf *~ *.aux *.bbl *.dvi *.log *.out *.blg *.toc *.fdb_latexmk *.fls *.tdo
 
 view:
-	open ${FILE}.pdf
+	open ${VIEW}.pdf
 
 # all dependce tracking taking care of by Latexmk
 fast:
 	latexmk -pdf ${FILE}
 
 watch:
-	latexmk -pvc -view=pdf ${FILE}
+	latexmk -pvc -view=pdf ${VIEW}
 
 .PHONY: all clean view fast watch
 
