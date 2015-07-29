@@ -14,10 +14,6 @@
     "array"
     "graphicx"
     "booktabs"
-    "pifont"
-    "todonotes"
-    "rotating"
-    "color"
     "caption")
    (TeX-add-symbols
     '("FILE" 1)
