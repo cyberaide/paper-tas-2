@@ -1,8 +1,8 @@
-#FILE=vonLaszewski-tas
-FILE=vonLaszewski-tas-cluster-2pages
+FILE=vonLaszewski-tas
+#FILE=vonLaszewski-tas-cluster-2pages
 
-FILE-xsede=vonLaszewski-tas-xsede
-FILE-cluster=vonLaszewski-tas-cluster
+#FILE-xsede=vonLaszewski-tas-xsede
+#FILE-cluster=vonLaszewski-tas-cluster
 
 all:
 	pdflatex ${FILE}
@@ -12,6 +12,9 @@ all:
 
 xsede:
 	make -f Makefile FILE=$(FILE-xsede)
+
+two:
+	make -f Makefile FILE=$(FILE-cluster-2pages)
 
 cluster:
 	make -f Makefile FILE=$(FILE-cluster)
