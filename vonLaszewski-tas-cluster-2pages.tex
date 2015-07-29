@@ -182,24 +182,18 @@ To conduct the analysis, the general workflow includes obtaining the publication
 
 \section{Metric for Journal Publication-based Peer Comparison} \label{S:metric}
 
-We compared studied (from XSEDE and NCAR) publications with their peers by looking at the citation count and relative ranking. The process is as the following:
-\begin{enumerate}
-\item Identify publication venues of the reported XSEDE or NCAR publications;
-\item Retrieve all publication data from those venues during the same time period;
-\item Identify the peers comparison groups (All publications in same journal issues);
-\item Calculate ranking scores of XSEDE publications and their peers;
-\item Use the raw ranking scores to derive comparison metrics at different aggregation level (e.g. journal, Field of Study).
-\end{enumerate}
+We compared XSEDE and NCAR publications with their peers (more than one million publication) by looking at the citation count and relative ranking  through the following process: 
+(1) Identify publication venues of the reported XSEDE or NCAR publications;
+(2) Retrieve all publication data from those venues during the same time period;
+(3) Identify the peers comparison groups (All publications in same journal issues);
+(4) Calculate ranking scores of XSEDE publications and their peers; and
+(5) Use the raw ranking scores to derive comparison metrics at different aggregation level (e.g. journal, Field of Study).
 
-During this process we have retrieved more than one million publication records to facilitate the peers comparison.
-
-We also identified a performance score based on weighted sums of the percentages of publications falling into each quarter by percentile ranking.:
+We defined a performance score based on weighted sums of the percentages of publications falling into each quarter by percentile ranking:
 
 \[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
 
-In which, $P_{Q_i}$ is the percentage of publications falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS.
-
-It is trivial to see that $S$ has its value from $[-1, 1]$. A positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
+wher, $P_{Q_i}$ is the percentage of publications falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS. As $S$ has a range from $[-1, 1]$,  a positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
 
 \section{XSEDE Peer Data Analysis}
 \label{S:xsede}
@@ -238,7 +232,7 @@ Peers & 168422	& 49	& 48	& 13	& 5 \\
 
 
 
-\begin{figure}[H]
+\begin{figure}[t!]
 \includegraphics[width=.9\columnwidth]{images-new/xsede-journal-score.pdf} 
 \vspace{-6pt}
 \caption{The score of our peer comparison metric for XSEDE publications by journal.}\label{F:xsede-score}
