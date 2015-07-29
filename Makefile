@@ -11,13 +11,13 @@ all:
 	pdflatex ${FILE}
 
 xsede:
-	make -f Makefile FILE=$(FILE-xsede)
+	make -f Makefile FILE=$(FILE)-xsede
 
 two:
-	make -f Makefile FILE=$(FILE-cluster-2pages)
+	make -f Makefile FILE=$(FILE)-cluster-2pages
 
 cluster:
-	make -f Makefile FILE=$(FILE-cluster)
+	make -f Makefile FILE=$(FILE)-cluster
 
 
 google:
