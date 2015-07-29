@@ -294,27 +294,7 @@ To show the percentile distribution in more detail for each journal, we present 
   \caption{Percentile ranging by FOS in a stacked barchart of NCAR publications.}\label{F:ncar-stacked-b} 
 \end{comment}
 
-
-
-We have replicated the publication citation analysis with a text file of 880 publications obtained from NCAR. Because the NCAR data set was smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis in this case. To conduct the analysis, we took the following steps.
-
-\begin{enumerate}
-
-\item We parsed the text file containing 880 publications into a structured database while identifying titles, and DOIs.
-
-\item With our framework, we queried ISI Web of Knowledge to get detailed information on the publications -- journal name, issue, citation data and other identifying information. We were able to verify and obtain data for 813 publications.
-
-\item Through our framework, we identified and obtained peer data based on journal issue information. In total, 130 different publication venues have been identified. To ensure the results are statistically meaningful, we eliminated those with less than five publications appearing in them.  This leads to 35 different journals that cover 653 publications. Out of the 35 journals, we had peers data for 12 of them (from our XSEDE peers comparison work). For the other 23 journals, we obtained peer publication data for an additional 39,000 publications.
-
-\item For each NCAR publication, we computed the percentile ranking among peers within the same journal issue against all publication entries as obtained from ISI Web of Knowledge.
-
-\item We grouped the percentile ranking scores based on each journal, divided the scores into each ranking quarters ($Q_1$: top 25\%; top $Q_2$: 25\%~50\%; bottom $Q_3$: 50\%-75\%, bottom $Q_4$: 75\%-100\%), and computed the percentage for those that fall into each ranking quarter.
-
-\end{enumerate}
-
-We depict the result in a stacked column chart similar to that used in Figure \ref{F:xsede-stacked}.  In Figure \ref{F:ncar-distribution}, we show the distribution of the publications in the top 10 journals sorted by the number of publications. The top 10 journals total 484 publications. They account for about three quarters of the 653 publications from the 35 journals with at least five publications appearing in them; or 60\% of the 813 publications from the 130 journals we identified via the ISI source (see Table~\ref{T:ncar-pub-count-venue}).
-
-We also computed and compared the \emph{performance score} as defined earlier. The result is shown in Figure \ref{F:ncar-score}. Here we see that the average over all 35 entries is a positive value of about 0.35. 
+We have replicated the publication citation analysis with NCAR publication data with about 900 records. Because the NCAR data set was smaller than the one from XSEDE, instead of looking at all journals that have at least ten publications, we reduced the value to five. This will give a large enough journal number to conduct our analysis in this case. The \emph{performance score} as defined earlier is presented as in Figure \ref{F:ncar-score} as a comparison with XSEDE. Again we see a positive value of about 0.35 indicating the better performance than the peers'.
 
 \section{Conclusion} \label{S:conclusion}
 
