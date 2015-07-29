@@ -1,4 +1,5 @@
 #FILE=vonLaszewski-tas
+FILE=vonLaszewski-tas-cluster-2pages
 
 FILE-xsede=vonLaszewski-tas-xsede
 FILE-cluster=vonLaszewski-tas-cluster
