@@ -181,15 +181,24 @@ To conduct the analysis, the general workflow includes obtaining the publication
 
 \section{Metric for Journal Publication-based Peer Comparison} \label{S:metric}
 
-While we focused in our previous work more on the internal analysis of data within XSEDE in regards to FOS, h-index, g-index and i-index, in this work we extend the scope to a comparison with external peer publications and hence significantly expand our original analysis. To conduct this analysis, we introduce the definition of a metric that allows us to analyze and compare journal publications amongst peers, as well as identify a suitable peer group for the comparison.
+\section{Metric for Journal Publication-based Peer Comparison} \label{S:metric}
 
-Hence we considered for this work {\em\bf all} publications that are uploaded through self-identification by users into the XSEDE portal, as well as XSEDE reports. We then identified from this set all {\em all} journal publications and identified from that subset all journals that had at least ten self-identified publications from XSEDE. Although the number to meet this threshold is small, we found the restriction useful as it defines a peer group of scientists that publish repeatedly in these journals, thus making the comparison more meaningful. Once we identified such journals, we compared the citation count for each publication located in a journal issue that had at least one XSEDE publication. Our comparison is between publications in such journals that we identified as XSEDE papers and those that were not. 
+We compared studied (from XSEDE and NCAR) publications with their peers by looking at the citation count and relative ranking. The process is as the following:
+\begin{enumerate}
+\item Identify publication venues of the reported XSEDE or NCAR publications;
+\item Retrieve all publication data from those venues during the same time period;
+\item Identify the peers comparison groups (All publications in same journal issues);
+\item Calculate ranking scores of XSEDE publications and their peers;
+\item Use the raw ranking scores to derive comparison metrics at different aggregation level (e.g. journal, Field of Study).
+\end{enumerate}
 
-Next we introduce the percentile ranking of citations as the metric for the comparison of XSEDE publications with their non-XSEDE peers. The percentile ranking is based on the sum of all citations for a paper while at the same time ranking that number in four uniform percentile categories. Thus the papers in the first percentile have the most citations, the ones in the second have fewer, and so forth.  We add the weighted sums of these counts. Thus the performance score is defined as:
+During this process we have retrieved more than one million publication records to facilitate the peers comparison.
+
+We also identified a performance score based on weighted sums of the percentages of publications falling into each quarter by percentile ranking.:
 
 \[	S = 1*P_{Q_1} + 0.5*P_{Q_2}+ (-0.5)*P_{Q_3} + (-1)*P_{Q_4} \]
 
-In which, $P_{Q_i}$ is the percentage of pubs falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS.
+In which, $P_{Q_i}$ is the percentage of publications falling into the top i quarter. $P_{Q_i}$ gets the value in $[0,1]$ and $\sum_{i} {P_{Q_i}} = 1$ for one FOS.
 
 It is trivial to see that $S$ has its value from $[-1, 1]$. A positive value implies more publications appear in the upper half in ranking and negative means more in the lower half.
 
