@@ -1,4 +1,4 @@
-\documentclass{sig-alternate}
+\documentclass[10pt, conference, compsocconf]{IEEEtran}
 
 \hyphenation{data-bases}
 
@@ -68,18 +68,20 @@
 
 \begin{document}
 
-
+\begin{comment}
 %\conferenceinfo{submitted to XSEDE}{'15,  July 26 - 30 2015, St. Louis, MO, USA}
 \conferenceinfo{submitted to ...}{2015,USA}
 \CopyrightYear{2015} 
 \crdata{TBD...\$15.00.\\
 http://dx.doi.org/TBD
 } 
-
+\end{comment}
 
 \title{\TITLE\vspace{-12pt}}
 
 
+
+\begin{comment}
 \numberofauthors{3}  
 \author{ 
 \alignauthor 
@@ -106,6 +108,48 @@ Steven M. Gallo\\ \vspace{6pt}
 }
 
 \date{28 May 2014}
+\end{comment}
+
+\begin{comment}
+\author{\IEEEauthorblockN{%
+Gregor von Laszewski,
+Fugang Wang,
+Geoffrey C. Fox}
+\IEEEauthorblockA{School of Informatics and Computing\\
+Indiana University\\
+Bloomington, Indiana, U.S.A.\\
+laszewski@gmail.com}
+\and
+\IEEEauthorblockN{David L. Hart}
+\IEEEauthorblockA{%
+Computational and Information Systems Laboratory\\
+NCAR\\
+Boulder CO 80307-3000}
+\and
+\IEEEauthorblockN{Thomas R. Furlani,
+Robert L. DeLeon,
+Steven M. Gallo}
+\IEEEauthorblockA{%
+Center for Computational Research\\
+University at Buffalo, SUNY\\ 
+Buffalo, New York, 14203}
+}
+\end{comment}
+
+\author{\IEEEauthorblockN{%
+Gregor von Laszewski$^1$,
+Fugang Wang$^1$,
+Geoffrey C. Fox$^1$
+David L. Hart$^2$\\
+Thomas R. Furlani$^3$,
+Robert L. DeLeon$^3$,
+Steven M. Gallo$^3$}
+\IEEEauthorblockA{%
+$^1$School of Informatics and Computing, Indiana University, Bloomington, Indiana, U.S.A.\\
+$^2$Computational and Information Systems Laboratory, NCAR, Boulder CO 80307-3000, U.S.A.\\
+$^3$Center for Computational Research, University at Buffalo, SUNY, Buffalo, New York, 14203, U.S.A.\\
+ laszewski@gmail.com}
+}
 
 \maketitle
 
@@ -115,7 +159,7 @@ We present a framework that compares the publication impact based on a comprehen
 
 \end{abstract}
 
-
+\begin{comment}
 \vspace{-6pt}
 
 \category{H.4}{Information Systems Applications}{Miscellaneous}
@@ -126,7 +170,7 @@ performance measures]
 
 \keywords{Scientific impact, bibliometric, h-index, Technology Audit
   Service, XDMoD, XSEDE}
-
+\end{comment}
 
 \section{Introduction} 
 
@@ -306,20 +350,17 @@ We will further expand upon our metric and can define such values also for other
  
 This work is part of the Technology Auditing Service (TAS) project sponsored by NSF under grant number OCI-1025159. Lessons learned from FutureGrid have significantly influenced this work. Gathering publications was first pioneered by FutureGrid, influencing the development in the XSEDE portal. We would like to thank Matt Hanlon and Maytal Dahan for their efforts to integrate this framework into the XSEDE portal. 
  
+
 %\bibliographystyle{IEEEtranS}
-%\bibliographystyle{IEEEtran}
-\bibliographystyle{abbrvurl} 
+%\bibliographystyle{abbrvurl} 
+\bibliographystyle{IEEEtran}
 \bibliography{% 
 bib/tas,%
 bib/vonlaszewski-new} 
 
+
+
 \end{document}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% END END 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
